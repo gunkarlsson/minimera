@@ -32,6 +32,7 @@ export default function Signup() {
   return (
     <>
       <PrimarySection>
+        <h1>minimera</h1>
         <h2>Sign Up</h2>
         {error && <div>{error}</div>}
         <form onSubmit={handleSubmit}>

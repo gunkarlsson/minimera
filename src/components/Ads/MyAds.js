@@ -1,6 +1,6 @@
 import React from "react";
 import AdCard from "./AdCard";
-import { PrimarySection, ItemCard } from "../../style/StyledComponents";
+import { PrimarySection } from "../../style/StyledComponents";
 
 const MyAds = () => {
   return (

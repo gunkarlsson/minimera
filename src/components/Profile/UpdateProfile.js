@@ -4,12 +4,9 @@ import { useHistory } from "react-router-dom";
 import {
   BackButton,
   PrimarySection,
-  PrimaryButton,
-  PrimaryH1,
   UpdateProfileForm,
-  FormSection,
   SecondaryH1,
-  SubmitButton,
+  PrimaryButton,
 } from "../../style/StyledComponents";
 import { FaAngleLeft } from "react-icons/fa";
 
@@ -75,33 +72,32 @@ export default function UpdateProfile() {
 
         {error && <div>{error}</div>}
         {message && <div>{message}</div>}
-        <FormSection>
-          <UpdateProfileForm onSubmit={handleSubmit}>
-            <div className="form-control">
-              <input type="email" ref={emailRef} required />
-              <label>
-                <span>{currentUser.email}</span>
-              </label>
-            </div>
 
-            <div className="form-control">
-              <input type="password" ref={passwordRef} required />
-              <label>
-                <span>Password</span>
-              </label>
-            </div>
-            <div className="form-control">
-              <input type="password" ref={passwordConfirmRef} required />
-              <label>
-                <span>Confirm password</span>
-              </label>
-            </div>
+        <UpdateProfileForm onSubmit={handleSubmit}>
+          <div className="form-control">
+            <input type="email" ref={emailRef} required />
+            <label>
+              <span>{currentUser.email}</span>
+            </label>
+          </div>
 
-            <SubmitButton disabled={loading} type="submit">
-              Save changes
-            </SubmitButton>
-          </UpdateProfileForm>
-        </FormSection>
+          <div className="form-control">
+            <input type="password" ref={passwordRef} required />
+            <label>
+              <span>Password</span>
+            </label>
+          </div>
+          <div className="form-control">
+            <input type="password" ref={passwordConfirmRef} required />
+            <label>
+              <span>Confirm password</span>
+            </label>
+          </div>
+
+          <PrimaryButton disabled={loading} type="submit">
+            Save changes
+          </PrimaryButton>
+        </UpdateProfileForm>
       </PrimarySection>
     </>
   );

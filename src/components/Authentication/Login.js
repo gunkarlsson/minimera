@@ -28,6 +28,7 @@ export default function Login() {
   return (
     <>
       <PrimarySection>
+        <h1>minimera</h1>
         <h2>Log In</h2>
         {error && <div>{error}</div>}
         <form onSubmit={handleSubmit}>

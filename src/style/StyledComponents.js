@@ -1,5 +1,39 @@
 import styled from "styled-components";
 
+//---------------------------------- NAVBAR --------------------------------
+export const Navbar = styled.nav`
+  ul {
+    z-index: 10;
+    background-color: ${(props) => props.theme.bgColor1};
+    min-height: 8vh;
+    max-height: 8vh;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  li {
+    list-style: none;
+    padding: 5px;
+    color: black;
+  }
+  li:active,
+  li:focus {
+    outline: none;
+    background: none;
+  }
+  .nav-tab > * {
+    color: ${(props) => props.theme.fontColor1};
+    transition: all 0.3s ease;
+  }
+  .nav-tab-active > * {
+    color: ${(props) => props.theme.accentColor};
+  }
+`;
+
 //---------------------------------- SECTIONS --------------------------------
 export const PrimarySection = styled.section`
   height: 92vh;
@@ -8,15 +42,6 @@ export const PrimarySection = styled.section`
   background-color: ${(props) => props.theme.bgColor2};
   color: ${(props) => props.theme.fontColor1};
   position: absolute;
-`;
-
-export const SecondarySection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background-color: ${(props) => props.theme.bgColor2};
-  color: ${(props) => props.theme.fontColor1};
 `;
 
 //----------------------------------- TEXT ELEMENTS ----------------------------------
@@ -57,11 +82,6 @@ export const PrimaryLink = styled.li`
 `;
 
 //----------------------------------- FORMS ----------------------------------
-export const FormSection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const UpdateProfileForm = styled.form`
   display: flex;
@@ -110,16 +130,7 @@ export const UpdateProfileForm = styled.form`
   }
 `;
 
-//----------------------------------- BOOK GRID ----------------------------------
-export const ResultGrid = styled.section`
-  padding: 0 20px;
-  max-height: 80vh;
-  display: grid;
-  justify-items: center;
-  grid-template-columns: repeat(2, 1fr);
-  /* grid-gap: 0.5rem; */
-  overflow: scroll;
-`;
+//----------------------------------- AD GRID ----------------------------------
 
 export const ItemCard = styled.section`
   background-color: beige;
@@ -129,6 +140,12 @@ export const ItemCard = styled.section`
   align-items: center;
   overflow: hidden;
   width: 180px;
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    cursor: pointer;
+  }
 
   .image-bg {
     background-color: ${(props) => props.theme.bgColor1};
@@ -190,16 +207,6 @@ export const PrimaryButton = styled.button`
   color: ${(props) => props.theme.fontColor1};
   font-size: 1.2rem;
   width: 80%;
-  margin-top: 50px;
-  padding: 10px;
-`;
-
-export const SubmitButton = styled.button`
-  background: none;
-  border: 2px solid ${(props) => props.theme.fontColor1};
-  color: ${(props) => props.theme.fontColor1};
-  font-size: 1.2rem;
-  width: 100%;
   margin-top: 50px;
   padding: 10px;
 `;

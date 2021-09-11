@@ -6,7 +6,6 @@ import {
   PrimarySection,
   PrimaryLink,
   PrimaryH1,
-  SecondarySection,
   PrimaryButton,
 } from "../../style/StyledComponents";
 
@@ -29,17 +28,14 @@ const Settings = () => {
     <PrimarySection>
       {" "}
       <PrimaryH1>Settings</PrimaryH1>
-      <SecondarySection>
-        <PrimaryLink>
-          <Link to={ROUTES.UPDATE_PROFILE}>Update password or email</Link>
-        </PrimaryLink>
-        <PrimaryLink>
-          <Link to={ROUTES.MY_ADS}>My Ads</Link>
-        </PrimaryLink>
-
-        {error && <div>{error}</div>}
-        <PrimaryButton onClick={handleLogout}>Log Out</PrimaryButton>
-      </SecondarySection>
+      <PrimaryLink>
+        <Link to={ROUTES.UPDATE_PROFILE}>Update password or email</Link>
+      </PrimaryLink>
+      <PrimaryLink>
+        <Link to={ROUTES.MY_ADS}>My Ads</Link>
+      </PrimaryLink>
+      {error && <div>{error}</div>}
+      <PrimaryButton onClick={handleLogout}>Log Out</PrimaryButton>
     </PrimarySection>
   );
 };
