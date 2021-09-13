@@ -83,6 +83,14 @@ export const PrimaryLink = styled.li`
 
 //----------------------------------- FORMS ----------------------------------
 
+export const AdForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 3px solid blue;
+  padding: 5px;
+`;
+
 export const UpdateProfileForm = styled.form`
   display: flex;
   flex-direction: column;
