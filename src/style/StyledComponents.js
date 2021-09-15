@@ -83,7 +83,7 @@ export const PrimaryLink = styled.li`
 
 //----------------------------------- FORMS ----------------------------------
 
-export const AdForm = styled.div`
+export const AdForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;

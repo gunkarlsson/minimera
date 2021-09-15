@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { PrimarySection } from "../../style/StyledComponents";
 
 export default function Signup() {
+  const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
@@ -36,6 +37,9 @@ export default function Signup() {
         <h2>Sign Up</h2>
         {error && <div>{error}</div>}
         <form onSubmit={handleSubmit}>
+          <div>
+            <input type="text" placeholder="Name" ref={nameRef} required />
+          </div>
           <div>
             <input type="email" placeholder="Email" ref={emailRef} required />
           </div>
