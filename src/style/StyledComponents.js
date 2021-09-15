@@ -42,6 +42,20 @@ export const PrimarySection = styled.section`
   background-color: ${(props) => props.theme.bgColor2};
   color: ${(props) => props.theme.fontColor1};
   position: absolute;
+
+  .ad {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid blue;
+  }
+
+  .ad div {
+    margin-top: 10px;
+    border-top: 2px solid blue;
+  }
 `;
 
 //----------------------------------- TEXT ELEMENTS ----------------------------------

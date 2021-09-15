@@ -35,7 +35,16 @@ const Settings = () => {
         <Link to={ROUTES.MY_ADS}>My Ads</Link>
       </PrimaryLink>
       {error && <div>{error}</div>}
-      <PrimaryButton onClick={handleLogout}>Log Out</PrimaryButton>
+      <PrimaryButton
+        onClick={() => {
+          const confirmBox = window.confirm("Do you really want to log out?");
+          if (confirmBox === true) {
+            handleLogout();
+          }
+        }}
+      >
+        Log out
+      </PrimaryButton>
     </PrimarySection>
   );
 };

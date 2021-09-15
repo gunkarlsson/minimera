@@ -99,7 +99,7 @@ const MyAds = () => {
     <PrimarySection>
       <h1>My Ads</h1>
       <AdForm onSubmit={handleSubmit}>
-        <h3>Add new</h3>
+        <h3>Add new or edit ads</h3>
         <input
           required
           type="text"
