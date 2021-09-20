@@ -16,6 +16,7 @@ import * as ROUTES from "./constants/routes";
 import { GlobalStyle } from "./style/Themes";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import EditAd from "./components/Ads/EditAd";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           />
           <PrivateRoute path={ROUTES.ADD_NEW_AD} component={AddNewAd} />
           <PrivateRoute path={ROUTES.MY_ADS} component={MyAds} />
+          <PrivateRoute path={`${ROUTES.EDIT_AD}/:id`} component={EditAd} />
 
           <Route path={ROUTES.AD_CARD} component={AdCard} />
           <Route path={ROUTES.AD_DETAILS} component={AdDetails} />

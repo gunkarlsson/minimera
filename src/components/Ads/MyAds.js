@@ -14,20 +14,20 @@ const MyAds = () => {
   const currentUserId = currentUser ? currentUser.uid : null;
   const [myAds, setMyAds] = useState([]);
 
-  useEffect(() => {
-    db.collection("users")
-      .doc(currentUser.uid)
-      .collection("myAds")
-      .get()
-      //this is async, so it returns a promise
-      .then((snapshot) => {
-        let documents = [];
-        snapshot.docs.forEach((doc) => {
-          documents.push(doc.data());
-        });
-        setMyAds(documents);
-      });
-  }, []);
+  // useEffect(() => {
+  //   db.collection("users")
+  //     .doc(currentUser.uid)
+  //     .collection("myAds")
+  //     .get()
+  //     //this is async, so it returns a promise
+  //     .then((snapshot) => {
+  //       let documents = [];
+  //       snapshot.docs.forEach((doc) => {
+  //         documents.push(doc.data());
+  //       });
+  //       setMyAds(documents);
+  //     });
+  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,7 +36,7 @@ const MyAds = () => {
     setDesc("");
   };
   //TUTORIAL WAY: BETTER PERFORMANCE + INSTANT UPDATE
-  const ref = db.collection("group1");
+  const ref = db.collection("allAds");
 
   const getAds = () => {
     setLoading(true);
@@ -45,7 +45,7 @@ const MyAds = () => {
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
-      setAds(items);
+      setMyAds(items);
       setLoading(false);
       console.log(currentUser.email, currentUser.name);
     });
@@ -54,26 +54,6 @@ const MyAds = () => {
   useEffect(() => {
     getAds();
   }, []);
-
-  const addAd = (newAd) => {
-    // const owner = currentUser ? currentUser.uid : "unknown";
-    // const ownerEmail = currentUser ? currentUser.email : "unknown";
-    // const newAd = {
-    //   title,
-    //   desc,
-    //   id: uuidv4(),
-    //   owner,
-    //   ownerEmail,
-    // };
-    // console.log("owner is: " + owner);
-    ref
-      .doc(newAd.id)
-      // .doc(); use this is for some reason you want firebase to create the id
-      .set(newAd)
-      .catch((err) => {
-        console.error(err);
-      });
-  };
 
   const deleteAd = (ad) => {
     ref
@@ -99,7 +79,7 @@ const MyAds = () => {
     <PrimarySection>
       <h1>My Ads</h1>
       <AdForm onSubmit={handleSubmit}>
-        <h3>Add new or edit ads</h3>
+        <h3>Edit ads</h3>
         <input
           required
           type="text"
@@ -113,14 +93,14 @@ const MyAds = () => {
           placeholder="Description"
           onChange={(e) => setDesc(e.target.value)}
         />
-        <button onClick={() => addAd({ title, desc, id: uuidv4() })}>
+        <button onClick={() => editAd({ title, desc, id: uuidv4() })}>
           Submit
         </button>
       </AdForm>
 
       {loading ? <h1>Loading...</h1> : null}
 
-      {ads.map((ad) => (
+      {myAds.map((ad) => (
         <div className="ad" key={ad.id}>
           <h2>{ad.title}</h2>
           <p>{ad.desc}</p>
