@@ -25,28 +25,28 @@ const App = () => {
       <AuthProvider>
         <GlobalStyle />
         <Navigation />
-        <Layout>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/create" component={CreateAd} />
-            <Route path={ROUTES.HOME} component={Home} />
+        {/* <Layout> */}
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/create" component={CreateAd} />
+          <Route path={ROUTES.HOME} component={Home} />
 
-            <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
-            <PrivateRoute
-              path={ROUTES.UPDATE_PROFILE}
-              component={UpdateProfile}
-            />
-            <PrivateRoute path={ROUTES.ADD_NEW_AD} component={AddNewAd} />
-            <PrivateRoute path={ROUTES.MY_ADS} component={MyAds} />
+          <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
+          <PrivateRoute
+            path={ROUTES.UPDATE_PROFILE}
+            component={UpdateProfile}
+          />
+          <PrivateRoute path={ROUTES.ADD_NEW_AD} component={AddNewAd} />
+          <PrivateRoute path={ROUTES.MY_ADS} component={MyAds} />
 
-            <Route path={ROUTES.AD_CARD} component={AdCard} />
-            <Route path={ROUTES.AD_DETAILS} component={AdDetails} />
-            <Route path={ROUTES.ABOUT} component={About} />
-            <Route path={ROUTES.LOG_IN} component={Login} />
-            <Route path={ROUTES.SIGN_UP} component={Signup} />
-            <Route path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} />
-          </Switch>
-        </Layout>
+          <Route path={ROUTES.AD_CARD} component={AdCard} />
+          <Route path={ROUTES.AD_DETAILS} component={AdDetails} />
+          <Route path={ROUTES.ABOUT} component={About} />
+          <Route path={ROUTES.LOG_IN} component={Login} />
+          <Route path={ROUTES.SIGN_UP} component={Signup} />
+          <Route path={ROUTES.FORGOT_PASSWORD} component={ForgotPassword} />
+        </Switch>
+        {/* </Layout> */}
       </AuthProvider>
     </Router>
   );
