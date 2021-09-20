@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../context/AuthContext";
-import { PrimarySection, AdForm } from "../style/StyledComponents";
+import { Container, Grid, Paper } from "@material-ui/core";
+import AdCard from "../components/Ads/AdCard";
 
 const Home = () => {
   const [ads, setAds] = useState([]);
@@ -28,18 +29,26 @@ const Home = () => {
   }, []);
 
   return (
-    <PrimarySection>
+    <Container>
       <h1>Group 1: Ads</h1>
 
-      {loading ? <h1>Loading...</h1> : null}
+      {/* {loading ? <h1>Loading...</h1> : null} */}
 
-      {ads.map((ad) => (
+      <Grid container spacing={3}>
+        {ads.map((ad) => (
+          <Grid item key={ad.id}>
+            <AdCard ad={ad} />
+          </Grid>
+        ))}
+      </Grid>
+
+      {/* {ads.map((ad) => (
         <div className="ad" key={ad.id}>
           <h3>{ad.title}</h3>
           <p>{ad.desc}</p>
         </div>
-      ))}
-    </PrimarySection>
+      ))} */}
+    </Container>
   );
 };
 
