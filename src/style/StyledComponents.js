@@ -4,7 +4,8 @@ import styled from "styled-components";
 export const Navbar = styled.nav`
   ul {
     z-index: 10;
-    background-color: ${(props) => props.theme.bgColor1};
+    background-color: #fff;
+    border-top: 2px solid gray;
     min-height: 8vh;
     max-height: 8vh;
     bottom: 0;
@@ -46,15 +47,10 @@ export const PrimarySection = styled.section`
   .ad {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 80%;
     padding: 5px;
-    margin: 5px;
+    margin: 10px;
     border: 2px solid blue;
-  }
-
-  .ad div {
-    margin-top: 10px;
-    border-top: 2px solid blue;
   }
 `;
 

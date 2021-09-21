@@ -13,6 +13,7 @@ const Settings = () => {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
+  const { currentUser } = useAuth();
 
   async function handleLogout() {
     setError("");
@@ -28,6 +29,8 @@ const Settings = () => {
     <PrimarySection>
       {" "}
       <PrimaryH1>Settings</PrimaryH1>
+      <h3>email: {currentUser.email}</h3>
+      <h3>userId: {currentUser.uid}</h3>
       <PrimaryLink>
         <Link to={ROUTES.UPDATE_PROFILE}>Update password or email</Link>
       </PrimaryLink>

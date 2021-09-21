@@ -8,8 +8,6 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const nameRef = useRef();
-  const areaRef = useRef();
   const [name, setName] = useState();
   const [area, setArea] = useState("north");
   const { signup } = useAuth();
@@ -29,15 +27,12 @@ export default function Signup() {
 
       let newUser = await signup(
         emailRef.current.value,
-        passwordRef.current.value,
-        nameRef.current.value,
-        areaRef.current.value
+        passwordRef.current.value
       );
 
       db.collection("users")
-        .doc(newUser.uid)
-        .set({ nameRef, areaRef, email: emailRef.current.value });
-
+        .doc(newUser.user.uid)
+        .set({ name, area, email: emailRef.current.value });
       history.push("/");
     } catch {
       setError("Failed to create an account");
@@ -54,14 +49,14 @@ export default function Signup() {
         {error && <div>{error}</div>}
         <form onSubmit={handleSubmit}>
           <div>
-            {/* <input
+            <input
               type="text"
               placeholder="Name"
               value={name}
               required
               onChange={(e) => setName(e.target.value)}
-            /> */}
-            <input type="text" placeholder="Name" ref={nameRef} required />
+            />
+            {/* <input type="text" placeholder="Name" ref={nameRef} required /> */}
           </div>
           <div>
             <input type="email" placeholder="Email" ref={emailRef} required />
@@ -84,26 +79,22 @@ export default function Signup() {
           </div>
           <div>
             <label>Stadsdel i Stockholm:</label>
-            {/* <select value={area} onChange={(e) => setArea(e.target.value)}>
-              <option value="north">Norr</option>
-              <option value="east">Östra</option>
-              <option value="west">Västra</option>
-              <option value="south">Söder</option>
-              <option value="center">Centrum</option>
-            </select> */}
-            <select ref={areaRef} required>
+            <select value={area} onChange={(e) => setArea(e.target.value)}>
               <option value="north">Norr</option>
               <option value="east">Östra</option>
               <option value="west">Västra</option>
               <option value="south">Söder</option>
               <option value="center">Centrum</option>
             </select>
+            {/* <select ref={areaRef} required>
+              <option value="north">Norr</option>
+              <option value="east">Östra</option>
+              <option value="west">Västra</option>
+              <option value="south">Söder</option>
+              <option value="center">Centrum</option>
+            </select> */}
           </div>
-          <button
-            disabled={loading}
-            type="submit"
-            // onClick={() => addAd({ title, desc, id: uuidv4() })}
-          >
+          <button disabled={loading} type="submit">
             Sign Up
           </button>
           <Link to="/login"> Already have an account? Login</Link>

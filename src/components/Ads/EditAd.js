@@ -5,49 +5,31 @@ import { useAuth } from "../../context/AuthContext";
 import { PrimarySection, AdForm } from "../../style/StyledComponents";
 
 const EditAd = () => {
-  const [ads, setAds] = useState([]);
+  const [myAds, setMyAds] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [loading, setLoading] = useState(false);
 
   const { currentUser } = useAuth();
   const currentUserId = currentUser ? currentUser.uid : null;
-  const [myAds, setMyAds] = useState([]);
-
-  // useEffect(() => {
-  //   db.collection("users")
-  //     .doc(currentUser.uid)
-  //     .collection("myAds")
-  //     .get()
-  //     //this is async, so it returns a promise
-  //     .then((snapshot) => {
-  //       let documents = [];
-  //       snapshot.docs.forEach((doc) => {
-  //         documents.push(doc.data());
-  //       });
-  //       setMyAds(documents);
-  //     });
-  // }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(title, desc);
     setTitle("");
     setDesc("");
   };
-  //TUTORIAL WAY: BETTER PERFORMANCE + INSTANT UPDATE
+
   const ref = db.collection("allAds");
 
   const getAds = () => {
     setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
+    ref.where("userId", "==", currentUserId).onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());
       });
       setMyAds(items);
       setLoading(false);
-      console.log(currentUser.email, currentUser.name);
     });
   };
 

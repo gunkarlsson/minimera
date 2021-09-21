@@ -45,22 +45,8 @@ const MyAds = () => {
       });
       setMyAds(items);
       setLoading(false);
-      console.log(currentUserId, myAds);
     });
   };
-
-  // const getAds = () => {
-  //   setLoading(true);
-  //   ref.onSnapshot((querySnapshot) => {
-  //     const items = [];
-  //     querySnapshot.forEach((doc) => {
-  //       items.push(doc.data());
-  //     });
-  //     setMyAds(items);
-  //     setLoading(false);
-  //     console.log(currentUser.email, currentUser.name);
-  //   });
-  // };
 
   useEffect(() => {
     getAds();
@@ -130,39 +116,3 @@ const MyAds = () => {
 };
 
 export default MyAds;
-
-//MY REWRITE OF TUTORIAL WAY
-// const getAds = () => {
-//   setLoading(true);
-//   db.collection("group1").onSnapshot((querySnapshot) => {
-//     //querySnapshot = the result of a query
-//     const items = [];
-//     querySnapshot.forEach((doc) => {
-//       //for each document in the querySnapshot, we want to apply the data()-method to it
-//       items.push(doc.data());
-//       //then put that result into our items array
-//     });
-//     setAds(items);
-//     setLoading(false);
-//   });
-// };
-
-// useEffect(() => {
-//   getAds();
-// }, []);
-
-//TUTORIAL WAY 2 WITH GET(), LESS PERFORMANT
-// const ref = db.collection("group1");
-// function getAds2() {
-//   setLoading(true);
-//   ref.get()
-//   .then((item) => {
-//     const items = items.docs.map((doc) => doc.data());
-//     setAds(items);
-//     setLoading(false);
-//   });
-// }
-// useEffect(() => {
-//   // getAds();
-//   getAds2();
-// }, []);
