@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
 import {
   Card,
   CardHeader,
@@ -8,9 +6,10 @@ import {
   Typography,
   Avatar,
 } from "@material-ui/core";
-import { DeleteOutlined } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/";
 import { yellow, green, pink, blue } from "@material-ui/core/colors";
+import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
+import { DeleteOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles({
   avatar: {
@@ -31,6 +30,7 @@ const useStyles = makeStyles({
 
 export default function AdCard({ ad, handleDelete }) {
   const classes = useStyles(ad);
+  const currentUserInfo = useCurrentUserInfo();
 
   return (
     <div>
@@ -41,21 +41,21 @@ export default function AdCard({ ad, handleDelete }) {
               {/* {ad.category[0].toUpperCase()} */}
             </Avatar>
           }
-          action={
-            <IconButton onClick={() => handleDelete(ad.id)}>
-              <DeleteOutlined />
-            </IconButton>
-          }
+          // action={
+          //   <IconButton onClick={() => handleDelete(ad.id)}>
+          //     <DeleteOutlined />
+          //   </IconButton>
+          // }
           title={ad.title}
           subheader={ad.category}
         />
         <CardContent>
-          {" "}
-          <Link to={ROUTES.AD_DETAILS}>
-            <Typography variant="body1" color="textSecondary">
-              {ad.details}
-            </Typography>{" "}
-          </Link>
+          <Typography variant="body1" color="textSecondary">
+            {ad.desc}
+            {ad.area}
+            {ad.userName}
+            {ad.userEmail}
+          </Typography>{" "}
         </CardContent>
       </Card>
     </div>

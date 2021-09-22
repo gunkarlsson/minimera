@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { PrimarySection } from "../style/StyledComponents";
 import useCurrentUserInfo from "../hooks/useCurrentUserInfo";
+import AdCard from "./Ads/AdCard";
+import { Typography, Container, Grid, Paper } from "@material-ui/core";
 
 const Home = () => {
   const [ads, setAds] = useState([]);
@@ -33,21 +35,17 @@ const Home = () => {
   }, [currentUserInfo]);
 
   return (
-    <PrimarySection>
-      <h1>All Ads</h1>
+    <Container>
+      <Typography component="h1">All Ads</Typography>
 
       {loading ? <h1>Loading...</h1> : null}
 
       {ads.map((ad) => (
-        <div className="ad" key={ad.title}>
-          <h3>title: {ad.title}</h3>
-          <p>{ad.desc}</p>
-          <p>{ad.area}</p>
-          <p>{ad.userName}</p>
-          <p>{ad.userEmail}</p>
+        <div className="ad" key={ad.id}>
+          <AdCard ad={ad} />
         </div>
       ))}
-    </PrimarySection>
+    </Container>
   );
 };
 

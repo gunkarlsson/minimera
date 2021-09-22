@@ -16,7 +16,6 @@ import * as ROUTES from "./constants/routes";
 import { GlobalStyle } from "./style/Themes";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import CreateAd from "./components/Ads/CreateAd";
 import Layout from "./components/Layout";
 
 const App = () => {
@@ -28,7 +27,6 @@ const App = () => {
         {/* <Layout> */}
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/create" component={CreateAd} />
           <Route path={ROUTES.HOME} component={Home} />
 
           <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
