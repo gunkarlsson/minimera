@@ -2,6 +2,7 @@ import { db } from "../firebase";
 import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
 import { getDoc, doc } from "firebase/firestore";
+//getDoc is the latest version syntax from firestore
 
 const useCurrentUserInfo = () => {
   const { currentUser } = useAuth();

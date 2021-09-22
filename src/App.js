@@ -32,7 +32,7 @@ const App = () => {
             path={ROUTES.UPDATE_PROFILE}
             component={UpdateProfile}
           />
-          <PrivateRoute path={ROUTES.ADD_NEW_AD} component={CreateAd} />
+          <PrivateRoute path={ROUTES.CREATE_AD} component={CreateAd} />
           <PrivateRoute path={ROUTES.MY_ADS} component={MyAds} />
           {/* <PrivateRoute path={`${ROUTES.EDIT_AD}/:id`} component={EditAd} /> */}
           <PrivateRoute path={ROUTES.EDIT_AD} component={EditAd} />

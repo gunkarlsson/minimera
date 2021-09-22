@@ -1,5 +1,5 @@
 export const ABOUT = "/about";
-export const ADD_NEW_AD = "/add-new-ad";
+export const CREATE_AD = "/create-ad";
 export const MY_ADS = "/my-ads";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const LOG_IN = "/login";

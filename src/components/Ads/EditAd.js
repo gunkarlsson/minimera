@@ -11,7 +11,6 @@ const EditAd = () => {
   const [loading, setLoading] = useState(false);
 
   const { currentUser } = useAuth();
-  const currentUserId = currentUser ? currentUser.uid : null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +22,7 @@ const EditAd = () => {
 
   const getAds = () => {
     setLoading(true);
-    ref.where("userId", "==", currentUserId).onSnapshot((querySnapshot) => {
+    ref.where("userId", "==", currentUser.uid).onSnapshot((querySnapshot) => {
       const items = [];
       querySnapshot.forEach((doc) => {
         items.push(doc.data());

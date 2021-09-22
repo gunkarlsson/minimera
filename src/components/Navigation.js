@@ -19,7 +19,7 @@ const Navigation = () => {
         </li>
         <li>
           <NavLink
-            to={ROUTES.ADD_NEW_AD}
+            to={ROUTES.CREATE_AD}
             className="nav-tab"
             activeClassName="nav-tab-active"
           >
