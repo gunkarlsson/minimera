@@ -8,12 +8,14 @@ import {
   PrimaryH1,
   PrimaryButton,
 } from "../../style/StyledComponents";
+import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
 
 const Settings = () => {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
   const { currentUser } = useAuth();
+  const currentUserInfo = useCurrentUserInfo();
 
   async function handleLogout() {
     setError("");
@@ -31,6 +33,7 @@ const Settings = () => {
       <PrimaryH1>Settings</PrimaryH1>
       <h3>email: {currentUser.email}</h3>
       <h3>userId: {currentUser.uid}</h3>
+      <h3>name: {currentUserInfo?.name}</h3>
       <PrimaryLink>
         <Link to={ROUTES.UPDATE_PROFILE}>Update password or email</Link>
       </PrimaryLink>

@@ -1,48 +1,36 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { PrimarySection } from "../style/StyledComponents";
-import { useAuth } from "../context/AuthContext";
+import useCurrentUserInfo from "../hooks/useCurrentUserInfo";
 
 const Home = () => {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { currentUser } = useAuth();
-  const [currentArea, setCurrentArea] = useState();
+  const currentUserInfo = useCurrentUserInfo();
 
-  //TUTORIAL WAY: BETTER PERFORMANCE + INSTANT UPDATE
-  // const ref = db.collection("allAds");
-
-  // get area from firestore
-  // useEffect(() => {
-  //   db.collection("users")
-  //     .get()
-  //     .then((snapshot) => {
-  //       let documents = [];
-  //       snapshot.docs.forEach((doc) => {
-  //         documents.push(doc.data());
-  //       });
-  //       setCurrentArea(documents[0].area);
-  //       console.log(currentArea);
-  //     });
-  // }, [currentUser.uid, currentArea]);
-
-  const getAds = () => {
+  const getAds = async () => {
     setLoading(true);
-    db.collection("allAds")
-      // .where("area", "==", "north")
-      .onSnapshot((querySnapshot) => {
-        const items = [];
-        querySnapshot.forEach((doc) => {
-          items.push(doc.data());
+
+    await db
+      .collection("allAds")
+      .where("area", "==", currentUserInfo.area)
+      .get()
+      .then((snapshot) => {
+        let gottenAds = [];
+        snapshot.forEach((doc) => {
+          gottenAds.push(doc.data());
         });
-        setAds(items);
-        setLoading(false);
+        setAds(gottenAds);
       });
+
+    setLoading(false);
   };
 
   useEffect(() => {
-    getAds();
-  }, []);
+    if (currentUserInfo) {
+      getAds();
+    }
+  }, [currentUserInfo]);
 
   return (
     <PrimarySection>
@@ -51,11 +39,12 @@ const Home = () => {
       {loading ? <h1>Loading...</h1> : null}
 
       {ads.map((ad) => (
-        <div className="ad" key={ad.id}>
-          <h3>{ad.title}</h3>
+        <div className="ad" key={ad.title}>
+          <h3>title: {ad.title}</h3>
           <p>{ad.desc}</p>
-          <p>userId: {ad.userId}</p>
-          <p>author email: {ad.authorEmail}</p>
+          <p>{ad.area}</p>
+          <p>{ad.userName}</p>
+          <p>{ad.userEmail}</p>
         </div>
       ))}
     </PrimarySection>

@@ -3,39 +3,32 @@ import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
 import { PrimarySection, AdForm } from "../../style/StyledComponents";
+import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
 
 const CreateAd = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-
   const { currentUser } = useAuth();
-  const currentUserId = currentUser ? currentUser.uid : null;
-  const authorEmail = currentUser ? currentUser.email : "unknown";
+  const currentUserInfo = useCurrentUserInfo();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setTitle("");
     setDesc("");
   };
-  //TUTORIAL WAY: BETTER PERFORMANCE + INSTANT UPDATE
-  const ref = db.collection("allAds");
 
   const createAd = () => {
     const newAd = {
       title,
       desc,
       id: uuidv4(),
-      userId: currentUserId,
-      authorEmail: authorEmail,
+      userId: currentUser.uid,
+      userEmail: currentUser.email,
+      userName: currentUserInfo.name,
+      area: currentUserInfo.area,
     };
 
-    ref
-      .doc(newAd.id)
-      // .doc(); use this is for some reason you want firebase to create the id
-      .set(newAd)
-      .catch((err) => {
-        console.error(err);
-      });
+    db.collection("allAds").doc(newAd.id).set(newAd);
   };
 
   return (

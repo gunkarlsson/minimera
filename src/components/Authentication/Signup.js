@@ -10,10 +10,10 @@ export default function Signup() {
   const passwordConfirmRef = useRef();
   const [name, setName] = useState();
   const [area, setArea] = useState("north");
-  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const { signup } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -46,7 +46,7 @@ export default function Signup() {
       <PrimarySection>
         <h1>minimera</h1>
         <h2>Sign Up</h2>
-        {error && <div>{error}</div>}
+
         <form onSubmit={handleSubmit}>
           <div>
             <input
@@ -97,6 +97,7 @@ export default function Signup() {
           <button disabled={loading} type="submit">
             Sign Up
           </button>
+          {error && <div className="error">{error}</div>}
           <Link to="/login"> Already have an account? Login</Link>
         </form>
       </PrimarySection>
