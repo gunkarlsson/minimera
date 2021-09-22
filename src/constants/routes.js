@@ -1,5 +1,5 @@
 export const ABOUT = "/about";
-export const ADD_NEW_AD = "/add-new-ad";
+export const CREATE_AD = "/create-ad";
 export const MY_ADS = "/my-ads";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const LOG_IN = "/login";
@@ -9,6 +9,7 @@ export const HOME = "/home";
 export const UPDATE_PROFILE = "/update-profile";
 export const AD_CARD = "/ad-card";
 export const AD_DETAILS = "/ad-details";
+export const EDIT_AD = "/edit-ad";
 
 export const YOU = "/you";
 export const HAVE_READ = "/have-read";

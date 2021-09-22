@@ -1,171 +1,58 @@
-import { useEffect, useState } from "react";
-import {
-  makeStyles,
-  Typography,
-  Button,
-  Container,
-  TextField,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-} from "@material-ui/core";
-import { useHistory } from "react-router";
+import React, { useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
+import { PrimarySection, AdForm } from "../../style/StyledComponents";
+import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
 
-const useStyles = makeStyles({
-  field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: "block",
-  },
-});
-
-export default function CreateAd() {
-  const classes = useStyles();
-  const history = useHistory();
+const CreateAd = () => {
   const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
-  const [titleError, setTitleError] = useState(false);
-  const [detailsError, setDetailsError] = useState(false);
-  const [category, setCategory] = useState("todos");
+  const [desc, setDesc] = useState("");
+  const { currentUser } = useAuth();
+  const currentUserInfo = useCurrentUserInfo();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTitleError(false);
-    setDetailsError(false);
-
-    if (title === "") {
-      setTitleError(true);
-    }
-    if (details === "") {
-      setDetailsError(true);
-    }
-    if (title && details) {
-      fetch("http://localhost:8000/notes", {
-        method: "POST",
-        headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ title, details, category }),
-      }).then(() => history.push("/"));
-    }
+    setTitle("");
+    setDesc("");
   };
 
-  const [ads, setAds] = useState([]);
-  const [desc, setDesc] = useState("");
-  const [loading, setLoading] = useState(false);
+  const createAd = () => {
+    const newAd = {
+      title,
+      desc,
+      id: uuidv4(),
+      userId: currentUser.uid,
+      userEmail: currentUser.email,
+      userName: currentUserInfo.name,
+      area: currentUserInfo.area,
+    };
 
-  const { currentUser } = useAuth();
-  const currentUserId = currentUser ? currentUser.uid : null;
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     console.log(title, desc);
-  //     setTitle("");
-  //     setDesc("");
-  //   };
-  //TUTORIAL WAY: BETTER PERFORMANCE + INSTANT UPDATE
-  const ref = db.collection("group1");
-
-  const getAds = () => {
-    setLoading(true);
-    ref.onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setAds(items);
-      setLoading(false);
-      console.log(currentUser.email, currentUser.name);
-    });
-  };
-
-  useEffect(() => {
-    getAds();
-  }, []);
-
-  const addAd = (newAd) => {
-    ref
-      .doc(newAd.id)
-      // .doc(); use this is for some reason you want firebase to create the id
-      .set(newAd)
-      .catch((err) => {
-        console.error(err);
-      });
+    db.collection("allAds").doc(newAd.id).set(newAd);
   };
 
   return (
-    <Container>
-      <Typography
-        component="h1"
-        variant="h6"
-        color="textSecondary"
-        gutterBottom
-      >
-        Create a new note
-      </Typography>
-
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <TextField
+    <PrimarySection>
+      <h1>Create Ad</h1>
+      <AdForm onSubmit={handleSubmit}>
+        <h3>Add new</h3>
+        <input
+          required
+          type="text"
+          value={title}
+          placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
-          className={classes.field}
-          label="Note title"
-          variant="outlined"
-          color="secondary"
-          fullWidth
-          required
-          error={titleError}
         />
-        <TextField
-          onChange={(e) => setDetails(e.target.value)}
-          className={classes.field}
-          label="Details"
-          variant="outlined"
-          color="secondary"
-          multiline
-          rows={4}
-          fullWidth
+        <textarea
           required
-          error={detailsError}
+          value={desc}
+          placeholder="Description"
+          onChange={(e) => setDesc(e.target.value)}
         />
-        <FormControl className={classes.field}>
-          <FormLabel>Note Category</FormLabel>
-          <RadioGroup
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            <FormControlLabel value="money" control={<Radio />} label="Money" />
-            <FormControlLabel value="todos" control={<Radio />} label="Todos" />
-            <FormControlLabel
-              value="reminders"
-              control={<Radio />}
-              label="Reminders"
-            />
-            <FormControlLabel value="work" control={<Radio />} label="Work" />
-          </RadioGroup>
-        </FormControl>
-
-        <Button
-          type="submit"
-          color="secondary"
-          variant="contained"
-          disableElevation
-          onClick={() => addAd({ title, desc, id: uuidv4() })}
-        >
-          Submit
-        </Button>
-      </form>
-
-      {loading ? <h1>Loading...</h1> : null}
-
-      {ads.map((ad) => (
-        <div className="ad" key={ad.id}>
-          <h2>{ad.title}</h2>
-          <p>{ad.desc}</p>
-        </div>
-      ))}
-    </Container>
+        <button onClick={() => createAd()}>Submit</button>
+      </AdForm>
+    </PrimarySection>
   );
-}
+};
+
+export default CreateAd;
