@@ -3,7 +3,10 @@ import {
   makeStyles,
   Avatar,
   AppBar,
+  Box,
   Toolbar,
+  IconButton,
+  Fab,
   Drawer,
   List,
   ListItem,
@@ -11,80 +14,61 @@ import {
   ListItemText,
   Typography,
 } from "@material-ui/core/";
-import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
 import { useHistory, useLocation } from "react-router";
 import { format } from "date-fns";
+import Navbar from "./Navbar";
 
 const useStyles = makeStyles((theme) => {
   return {
     page: {
       background: "#f9f9f9",
       width: "100%",
+      border: "2px solid orange",
       //   padding: theme.spacing(3),
       //spacing takes the base spacing (8px) * 3 = 24 px
     },
     drawer: {
       width: "100%",
+      border: "2px solid green",
     },
     drawerPaper: {
       width: "100%",
+      border: "2px solid blue",
     },
     root: {
       display: "flex",
+      border: "2px solid red",
     },
-    active: {
-      background: "#f4f4f4",
+    activeTab: {
+      background: "red",
     },
     title: {
       padding: theme.spacing(2),
+      border: "2px solid purple",
     },
   };
 });
 
 const Layout = ({ children }) => {
   const classes = useStyles();
-  const history = useHistory();
-  const location = useLocation();
-
-  const menuItems = [
-    {
-      text: "My Notes",
-      icon: <SubjectOutlined color="secondary" />,
-      path: "/",
-    },
-    {
-      text: "Create Note",
-      icon: <AddCircleOutlineOutlined color="secondary" />,
-      path: "/create",
-    },
-  ];
 
   return (
     <div className={classes.root}>
-      <div className={classes.page}>
+      {" "}
+      <Navbar />
+      {children}
+      {/* <div className={classes.page}>
         <div className={classes.toolbar}></div>
         {children}
-      </div>
+      </div> */}
+      {/*
       <Drawer
         className={classes.drawer}
         variant="permanent"
         anchor="bottom"
         classes={{ paper: classes.drawerPaper }}
       >
-        <List>
-          {menuItems.map((item) => (
-            <ListItem
-              button
-              key={item.text}
-              onClick={() => history.push(item.path)}
-              className={location.pathname == item.path ? classes.active : null}
-            >
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+      </Drawer> */}
     </div>
   );
 };

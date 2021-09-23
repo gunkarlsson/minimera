@@ -16,5 +16,4 @@ export const HAVE_READ = "/have-read";
 export const WANT_TO_READ = "/want-to-read";
 export const STATS = "/stats";
 export const SEARCH = "/search";
-export const SETTINGS = "/settings";
 export const BOOKS = "/books";

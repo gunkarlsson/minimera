@@ -10,17 +10,18 @@ import { makeStyles } from "@material-ui/core/";
 import { yellow, green, pink, blue } from "@material-ui/core/colors";
 import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
 import { DeleteOutlined } from "@material-ui/icons";
+import { currentUserInfo } from "../../hooks/useCurrentUserInfo";
 
 const useStyles = makeStyles({
   avatar: {
     backgroundColor: (ad) => {
-      if (ad.category == "work") {
+      if (ad.category == "bygg") {
         return yellow[700];
       }
-      if (ad.category == "money") {
+      if (ad.category == "hem") {
         return green[500];
       }
-      if (ad.category == "todos") {
+      if (ad.category == "sport") {
         return pink[500];
       }
       return blue[500];
@@ -28,7 +29,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function AdCard({ ad, handleDelete }) {
+export default function AdCard({ ad, deleteAd }) {
   const classes = useStyles(ad);
   const currentUserInfo = useCurrentUserInfo();
 
@@ -41,14 +42,12 @@ export default function AdCard({ ad, handleDelete }) {
               {/* {ad.category[0].toUpperCase()} */}
             </Avatar>
           }
-          // action={
-          //   <IconButton onClick={() => handleDelete(ad.id)}>
-          //     <DeleteOutlined />
-          //   </IconButton>
-          // }
           title={ad.title}
           subheader={ad.category}
         />
+        <IconButton onClick={() => deleteAd(ad.id)}>
+          <DeleteOutlined />
+        </IconButton>
         <CardContent>
           <Typography variant="body1" color="textSecondary">
             {ad.desc}

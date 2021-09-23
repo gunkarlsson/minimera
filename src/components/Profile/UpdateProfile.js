@@ -9,9 +9,24 @@ import {
   PrimaryButton,
 } from "../../style/StyledComponents";
 import { FaAngleLeft } from "react-icons/fa";
+import {
+  Typography,
+  Button,
+  Container,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from "@material-ui/core";
+import { ButtonGroup } from "@material-ui/core/";
+import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
+import { makeStyles } from "@material-ui/core/";
 
 export default function UpdateProfile() {
   const emailRef = useRef();
+  const [newEmail, setNewEmail] = useState();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const { currentUser, updatePassword, updateEmail } = useAuth();
@@ -63,42 +78,51 @@ export default function UpdateProfile() {
 
   return (
     <>
-      <PrimarySection>
-        <BackButton onClick={() => history.goBack()}>
+      <Container>
+        <Button onClick={() => history.goBack()}>
           <FaAngleLeft size="2em" title="back" />
-        </BackButton>
+        </Button>
 
-        <SecondaryH1>Update profile</SecondaryH1>
+        <Typography component="h2">Update profile</Typography>
 
         {error && <div>{error}</div>}
         {message && <div>{message}</div>}
 
-        <UpdateProfileForm onSubmit={handleSubmit}>
-          <div className="form-control">
+        <form autoComplete="off" onSubmit={handleSubmit}>
+          <div>
             <input type="email" ref={emailRef} required />
             <label>
               <span>{currentUser.email}</span>
             </label>
           </div>
 
-          <div className="form-control">
+          {/* <TextField
+            label="Email"
+            variant="standard"
+            color="secondary"
+            defaultValue={currentUser.email}
+            fullWidth
+            required
+          /> */}
+
+          <div>
             <input type="password" ref={passwordRef} required />
             <label>
               <span>Password</span>
             </label>
           </div>
-          <div className="form-control">
+          <div>
             <input type="password" ref={passwordConfirmRef} required />
             <label>
               <span>Confirm password</span>
             </label>
           </div>
 
-          <PrimaryButton disabled={loading} type="submit">
+          <Button variant="contained" disabled={loading} type="submit">
             Save changes
-          </PrimaryButton>
-        </UpdateProfileForm>
-      </PrimarySection>
+          </Button>
+        </form>
+      </Container>
     </>
   );
 }

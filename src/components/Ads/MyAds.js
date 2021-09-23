@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
-import { PrimarySection } from "../../style/StyledComponents";
+import AdCard from "./AdCard";
+import { Button, Container, Typography } from "@material-ui/core";
 
 const MyAds = () => {
   const [myAds, setMyAds] = useState([]);
@@ -36,12 +37,17 @@ const MyAds = () => {
   };
 
   return (
-    <PrimarySection>
-      <h1>My Ads</h1>
+    <Container>
+      <Typography component="h1">My Ads</Typography>
 
       {loading ? <h1>Loading...</h1> : null}
 
       {myAds.map((ad) => (
+        <div className="ad" key={ad.id}>
+          <AdCard ad={ad} deleteAd={deleteAd} />
+        </div>
+      ))}
+      {/* {myAds.map((ad) => (
         <div className="ad" key={ad.id}>
           <h2>{ad.title}</h2>
           <p>{ad.desc}</p>
@@ -50,8 +56,8 @@ const MyAds = () => {
             <button>Edit (no onClick)</button>
           </div>
         </div>
-      ))}
-    </PrimarySection>
+      ))} */}
+    </Container>
   );
 };
 
