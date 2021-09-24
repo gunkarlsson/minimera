@@ -1,13 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import {
-  BackButton,
-  PrimarySection,
-  UpdateProfileForm,
-  SecondaryH1,
-  PrimaryButton,
-} from "../../style/StyledComponents";
 import { FaAngleLeft } from "react-icons/fa";
 import {
   Typography,
@@ -20,9 +13,6 @@ import {
   FormControl,
   FormLabel,
 } from "@material-ui/core";
-import { ButtonGroup } from "@material-ui/core/";
-import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
-import { makeStyles } from "@material-ui/core/";
 
 export default function UpdateProfile() {
   const emailRef = useRef();

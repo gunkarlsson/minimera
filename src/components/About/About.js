@@ -1,39 +1,51 @@
 import React from "react";
-import { Card, Container, List, ListItem, Typography } from "@material-ui/core";
+import { Card, Container, Typography } from "@material-ui/core";
 
 const About = () => {
   return (
     <Container>
-      <Typography component="h1">Hur funkar det?</Typography>
+      <Typography variant="h4" align="center" gutterBottom>
+        Hur funkar det?
+      </Typography>
       <Card>
-        <Typography component="h2">Varför</Typography>
-        För att spara miljön och minska vår konsumtion av varor och saker som vi
-        annars kan dela med varandra.
+        <Typography variant="subtitle1" gutterBottom>
+          Varför
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          För att spara miljön och minska vår konsumtion av varor och saker som
+          vi annars kan dela med varandra.
+        </Typography>
       </Card>
       <Card>
-        <Typography component="h2">Att låna av någon</Typography>
-        <List>
-          <ListItem>• Hitta den annons som du är intresserad av </ListItem>
-          <ListItem>
-            • Klicka på “Kontakta annonsör” och skicka ett meddelande
-          </ListItem>
-          <ListItem>
-            • Om utlånaren godkänner förfrågan så kommer ni överens om tid för
-            upphämtning och återlämning själva
-          </ListItem>
-        </List>
+        <Typography variant="subtitle1" gutterBottom>
+          Att låna av någon
+        </Typography>
+
+        <Typography variant="body2" gutterBottom>
+          • Hitta den annons som du är intresserad av{" "}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          • Klicka på “Kontakta annonsör” och skicka ett meddelande
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          • Om utlånaren godkänner förfrågan så kommer ni överens om tid för
+          upphämtning och återlämning själva
+        </Typography>
       </Card>
       <Card>
-        <Typography component="h2">Att låna ut till någon</Typography>
-        <List>
-          <ListItem>• Lägg upp en eller flera annonser </ListItem>
-          <ListItem>
-            • När du får en förfrågan godkänner du (eller nekar om du inte kan)
-          </ListItem>
-          <ListItem>
-            • Ni kommer överens om tid för utlämning och återlämning själva
-          </ListItem>
-        </List>
+        <Typography variant="subtitle1" gutterBottom>
+          Att låna ut till någon
+        </Typography>
+
+        <Typography variant="body2" gutterBottom>
+          • Lägg upp en eller flera annonser{" "}
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          • När du får en förfrågan godkänner du (eller nekar om du inte kan)
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          • Ni kommer överens om tid för utlämning och återlämning själva
+        </Typography>
       </Card>
     </Container>
   );

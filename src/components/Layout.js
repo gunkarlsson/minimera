@@ -1,19 +1,5 @@
 import React from "react";
-import {
-  makeStyles,
-  Avatar,
-  AppBar,
-  Box,
-  Toolbar,
-  IconButton,
-  Fab,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from "@material-ui/core/";
+import { makeStyles } from "@material-ui/core/";
 import { useHistory, useLocation } from "react-router";
 import { format } from "date-fns";
 import Navbar from "./Navbar";
@@ -23,28 +9,18 @@ const useStyles = makeStyles((theme) => {
     page: {
       background: "#f9f9f9",
       width: "100%",
+      height: "calc(100vh - 60px)",
       border: "2px solid orange",
-      //   padding: theme.spacing(3),
+      padding: theme.spacing(2),
       //spacing takes the base spacing (8px) * 3 = 24 px
-    },
-    drawer: {
-      width: "100%",
-      border: "2px solid green",
-    },
-    drawerPaper: {
-      width: "100%",
-      border: "2px solid blue",
     },
     root: {
       display: "flex",
-      border: "2px solid red",
-    },
-    activeTab: {
-      background: "red",
+      border: "1px solid red",
     },
     title: {
       padding: theme.spacing(2),
-      border: "2px solid purple",
+      border: "1px solid purple",
     },
   };
 });
@@ -54,13 +30,9 @@ const Layout = ({ children }) => {
 
   return (
     <div className={classes.root}>
-      {" "}
       <Navbar />
-      {children}
-      {/* <div className={classes.page}>
-        <div className={classes.toolbar}></div>
-        {children}
-      </div> */}
+      <div className={classes.page}>{children}</div>
+
       {/*
       <Drawer
         className={classes.drawer}

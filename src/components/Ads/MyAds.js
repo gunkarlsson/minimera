@@ -38,7 +38,9 @@ const MyAds = () => {
 
   return (
     <Container>
-      <Typography component="h1">My Ads</Typography>
+      <Typography variant="h4" align="center" gutterBottom>
+        Mina annonser
+      </Typography>
 
       {loading ? <h1>Loading...</h1> : null}
 

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import { PrimarySection } from "../style/StyledComponents";
 import useCurrentUserInfo from "../hooks/useCurrentUserInfo";
 import AdCard from "./Ads/AdCard";
-import { Typography, Container, Grid, Paper } from "@material-ui/core";
+import { Typography, Container } from "@material-ui/core";
 
 const Home = () => {
   const [ads, setAds] = useState([]);
@@ -36,7 +35,9 @@ const Home = () => {
 
   return (
     <Container>
-      <Typography component="h1">All Ads</Typography>
+      <Typography variant="h4" align="center" gutterBottom>
+        Annonser i {currentUserInfo?.area}
+      </Typography>
 
       {loading ? <h1>Loading...</h1> : null}
 

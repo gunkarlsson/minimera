@@ -49,12 +49,11 @@ export default function AdCard({ ad, deleteAd }) {
           <DeleteOutlined />
         </IconButton>
         <CardContent>
-          <Typography variant="body1" color="textSecondary">
-            {ad.desc}
-            {ad.area}
-            {ad.userName}
-            {ad.userEmail}
-          </Typography>{" "}
+          <Typography variant="body1">{ad.desc}</Typography>
+
+          <Typography variant="body2">
+            {ad.area}, {ad.userName}, {ad.userEmail}
+          </Typography>
         </CardContent>
       </Card>
     </div>

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
-import { PrimarySection, AdForm } from "../../style/StyledComponents";
 import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
 
 import {
@@ -16,7 +15,6 @@ import {
   FormControl,
   FormLabel,
 } from "@material-ui/core";
-import { ButtonGroup } from "@material-ui/core/";
 import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
 import { makeStyles } from "@material-ui/core/";
 import { useHistory } from "react-router";
@@ -76,14 +74,14 @@ const CreateAd = () => {
 
   return (
     <Container>
-      <Typography component="h1" variant="h6" gutterBottom>
-        Create Ad
+      <Typography variant="h4" align="center" gutterBottom>
+        Lägg till ny annons
       </Typography>
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           onChange={(e) => setTitle(e.target.value)}
           className={classes.field}
-          label="Title"
+          label="Rubrik"
           variant="outlined"
           color="secondary"
           fullWidth
@@ -93,7 +91,7 @@ const CreateAd = () => {
         <TextField
           onChange={(e) => setDesc(e.target.value)}
           className={classes.field}
-          label="Description"
+          label="Beskrivning"
           variant="outlined"
           color="secondary"
           multiline
@@ -104,7 +102,7 @@ const CreateAd = () => {
         />
 
         <FormControl className={classes.field}>
-          <FormLabel>Category</FormLabel>
+          <FormLabel>Kategori</FormLabel>
           <RadioGroup
             value={category}
             onChange={(e) => setCategory(e.target.value)}
