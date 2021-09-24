@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import {
-  makeStyles,
-  BottomNavigation,
-  BottomNavigationAction,
-} from "@material-ui/core/";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { makeStyles } from "@mui/styles";
+// import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlinedIcon";
+// import InfoOutlinedIcon from "@mui/icons-material/InfoOutlinedIcon";
+// import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlinedIcon";
+// import HomeOutlinedIcon from "@mui/icons-material/HomeOutlinedIcon";
 import {
   AddCircleOutlineOutlined,
   InfoOutlined,
-  PersonOutlined,
+  PersonOutlineOutlined,
   HomeOutlined,
 } from "@material-ui/icons";
 
@@ -21,14 +22,27 @@ const useStyles = makeStyles({
     bottom: 0,
     height: "60px",
   },
+  active: {
+    border: "1px solid red",
+  },
 });
 
-const Navbar = () => {
+export const Navbar = () => {
   const classes = useStyles();
+  const [value, setValue] = useState("hem");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <>
-      <BottomNavigation className={classes.stickToBottom} showLabels>
+      <BottomNavigation
+        value={value}
+        onChange={handleChange}
+        className={classes.stickToBottom}
+        showLabels
+      >
         <BottomNavigationAction
           component={NavLink}
           to="/"
@@ -51,11 +65,9 @@ const Navbar = () => {
           component={NavLink}
           to="/profile"
           label="Profil"
-          icon={<PersonOutlined />}
+          icon={<PersonOutlineOutlined />}
         />
       </BottomNavigation>
     </>
   );
 };
-
-export default Navbar;

@@ -1,9 +1,17 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import { PrimarySection } from "../../style/StyledComponents";
+import {
+  Typography,
+  Button,
+  Container,
+  TextField,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from "@mui/material";
 
-export default function Login() {
+export const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
@@ -27,9 +35,10 @@ export default function Login() {
 
   return (
     <>
-      <PrimarySection>
-        <h1>minimera</h1>
-        <h2>Log In</h2>
+      <Container>
+        <Typography variant="h4" align="center" gutterBottom>
+          Log In
+        </Typography>
         {error && <div>{error}</div>}
         <form onSubmit={handleSubmit}>
           <div>
@@ -44,12 +53,12 @@ export default function Login() {
             />
           </div>
           <Link to="/forgot-password">Forgot Password?</Link>
-          <button disabled={loading} type="submit">
+          <Button variant="outlined" disabled={loading} type="submit">
             Log In
-          </button>
+          </Button>
           <Link to="/signup"> Need an account? Sign Up</Link>
         </form>
-      </PrimarySection>
+      </Container>
     </>
   );
-}
+};

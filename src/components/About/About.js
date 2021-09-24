@@ -1,7 +1,7 @@
 import React from "react";
-import { Card, Container, Typography } from "@material-ui/core";
+import { Card, Container, Typography } from "@mui/material";
 
-const About = () => {
+export const About = () => {
   return (
     <Container>
       <Typography variant="h4" align="center" gutterBottom>
@@ -50,5 +50,3 @@ const About = () => {
     </Container>
   );
 };
-
-export default About;

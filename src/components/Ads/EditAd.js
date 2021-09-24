@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
-import { PrimarySection, AdForm } from "../../style/StyledComponents";
 
-const EditAd = () => {
+export const EditAd = () => {
   const [myAds, setMyAds] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -57,9 +56,9 @@ const EditAd = () => {
   };
 
   return (
-    <PrimarySection>
+    <div>
       <h1>My Ads</h1>
-      <AdForm onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <h3>Edit ads</h3>
         <input
           required
@@ -77,7 +76,7 @@ const EditAd = () => {
         <button onClick={() => editAd({ title, desc, id: uuidv4() })}>
           Submit
         </button>
-      </AdForm>
+      </form>
 
       {loading ? <h1>Loading...</h1> : null}
 
@@ -95,8 +94,6 @@ const EditAd = () => {
           </div>
         </div>
       ))}
-    </PrimarySection>
+    </div>
   );
 };
-
-export default EditAd;

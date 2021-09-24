@@ -1,61 +1,71 @@
+import { FaTrashAlt } from "react-icons/fa";
 import {
   Card,
   CardHeader,
   CardContent,
+  CardActionArea,
   IconButton,
   Typography,
   Avatar,
-} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/";
-import { yellow, green, pink, blue } from "@material-ui/core/colors";
-import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
-import { DeleteOutlined } from "@material-ui/icons";
-import { currentUserInfo } from "../../hooks/useCurrentUserInfo";
+  capitalize,
+} from "@mui/material";
+import { teal, amber } from "@mui/material/colors";
+import { useAuth } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
+import { AdDetails } from "./AdDetails";
 
-const useStyles = makeStyles({
-  avatar: {
-    backgroundColor: (ad) => {
-      if (ad.category == "bygg") {
-        return yellow[700];
-      }
-      if (ad.category == "hem") {
-        return green[500];
-      }
-      if (ad.category == "sport") {
-        return pink[500];
-      }
-      return blue[500];
-    },
-  },
-});
-
-export default function AdCard({ ad, deleteAd }) {
-  const classes = useStyles(ad);
-  const currentUserInfo = useCurrentUserInfo();
+export const AdCard = ({ ad, deleteAd }) => {
+  const { currentUser } = useAuth();
+  const isMyAd = ad.userId === currentUser.uid;
 
   return (
-    <div>
-      <Card elevation={1}>
+    <Card elevation={1}>
+      <CardActionArea>
         <CardHeader
+          sx={{
+            borderBottom: 1,
+            justifyContent: "center",
+          }}
           avatar={
-            <Avatar className={classes.avatar}>
-              {/* {ad.category[0].toUpperCase()} */}
+            <Avatar
+              sx={isMyAd ? { bgcolor: amber[400] } : { bgcolor: teal[400] }}
+            >
+              {ad.category[0].toUpperCase()}
             </Avatar>
           }
-          title={ad.title}
-          subheader={ad.category}
+          title={<Typography variant="h6">{ad.title}</Typography>}
+          subheader={
+            <Typography variant="subtitle2" color="textSecondary">
+              {capitalize(ad.category)}
+            </Typography>
+          }
+          action={
+            <IconButton
+              size="small"
+              onClick={() => {
+                const confirmBox = window.confirm(
+                  "Are you sure you want to delete ad?"
+                );
+                if (confirmBox === true) {
+                  deleteAd(ad);
+                }
+              }}
+            >
+              <FaTrashAlt />
+            </IconButton>
+          }
         />
-        <IconButton onClick={() => deleteAd(ad.id)}>
-          <DeleteOutlined />
-        </IconButton>
+
         <CardContent>
-          <Typography variant="body1">{ad.desc}</Typography>
+          <Typography variant="body1" gutterBottom>
+            {ad.desc}
+          </Typography>
 
           <Typography variant="body2">
             {ad.area}, {ad.userName}, {ad.userEmail}
           </Typography>
         </CardContent>
-      </Card>
-    </div>
+      </CardActionArea>
+    </Card>
   );
-}
+};

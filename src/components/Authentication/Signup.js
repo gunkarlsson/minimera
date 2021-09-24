@@ -1,15 +1,25 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import { PrimarySection } from "../../style/StyledComponents";
 import { db } from "../../firebase";
+import {
+  Typography,
+  Button,
+  Container,
+  TextField,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from "@mui/material";
 
-export default function Signup() {
+export const Signup = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const [name, setName] = useState();
-  const [area, setArea] = useState("north");
+  const [area, setArea] = useState("norr");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -43,9 +53,10 @@ export default function Signup() {
 
   return (
     <>
-      <PrimarySection>
-        <h1>minimera</h1>
-        <h2>Sign Up</h2>
+      <Container>
+        <Typography variant="h4" align="center" gutterBottom>
+          Sign Up
+        </Typography>
 
         <form onSubmit={handleSubmit}>
           <div>
@@ -80,11 +91,11 @@ export default function Signup() {
           <div>
             <label>Stadsdel i Stockholm:</label>
             <select value={area} onChange={(e) => setArea(e.target.value)}>
-              <option value="north">Norr</option>
-              <option value="east">Östra</option>
-              <option value="west">Västra</option>
-              <option value="south">Söder</option>
-              <option value="center">Centrum</option>
+              <option value="norr">Norr</option>
+              <option value="östra">Östra</option>
+              <option value="västra">Västra</option>
+              <option value="söder">Söder</option>
+              <option value="centrum">Centrum</option>
             </select>
             {/* <select ref={areaRef} required>
               <option value="north">Norr</option>
@@ -94,13 +105,13 @@ export default function Signup() {
               <option value="center">Centrum</option>
             </select> */}
           </div>
-          <button disabled={loading} type="submit">
+          <Button variant="outlined" disabled={loading} type="submit">
             Sign Up
-          </button>
+          </Button>
           {error && <div className="error">{error}</div>}
           <Link to="/login"> Already have an account? Login</Link>
         </form>
-      </PrimarySection>
+      </Container>
     </>
   );
-}
+};

@@ -1,30 +1,27 @@
-import ForgotPassword from "./components/Authentication/ForgotPassword";
-import Login from "./components/Authentication/Login";
-import Signup from "./components/Authentication/Signup";
-import About from "./components/About/About";
-import Home from "./components/Home";
-import MyAds from "./components/Ads/MyAds";
-import CreateAd from "./components/Ads/CreateAd";
-import Profile from "./components/Profile/Profile";
-import UpdateProfile from "./components/Profile/UpdateProfile";
-import PrivateRoute from "./components/PrivateRoute";
-import AdDetails from "./components/Ads/AdDetails";
-import AdCard from "./components/Ads/AdCard";
-import EditAd from "./components/Ads/EditAd";
+import { ForgotPassword } from "./components/Authentication/ForgotPassword";
+import { Login } from "./components/Authentication/Login";
+import { Signup } from "./components/Authentication/Signup";
+import { About } from "./components/About/About";
+import { Home } from "./components/Home";
+import { MyAds } from "./components/Ads/MyAds";
+import { CreateAd } from "./components/Ads/CreateAd";
+import { Profile } from "./components/Profile/Profile";
+import { UpdateProfile } from "./components/Profile/UpdateProfile";
+import { PrivateRoute } from "./components/PrivateRoute";
+import { AdDetails } from "./components/Ads/AdDetails";
+import { AdCard } from "./components/Ads/AdCard";
+import { EditAd } from "./components/Ads/EditAd";
 import * as ROUTES from "./constants/routes";
 import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import { ThemeProvider } from "@material-ui/core";
-import { createTheme } from "@material-ui/core/styles";
+import { Layout } from "./style/Layout";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { orange } from "@mui/material/colors";
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#eae0d4",
-    },
-    secondary: {
-      main: "#04007c",
+      main: orange[500],
     },
   },
   typography: {
@@ -35,7 +32,8 @@ const theme = createTheme({
     fontWeightBold: 700,
   },
 });
-const App = () => {
+
+export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Router>
@@ -68,5 +66,3 @@ const App = () => {
     </ThemeProvider>
   );
 };
-
-export default App;

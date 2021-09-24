@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
-import useCurrentUserInfo from "../hooks/useCurrentUserInfo";
-import AdCard from "./Ads/AdCard";
-import { Typography, Container } from "@material-ui/core";
+import { useCurrentUserInfo } from "../hooks/useCurrentUserInfo";
+import { AdCard } from "./Ads/AdCard";
+import { Typography, Container } from "@mui/material";
 
-const Home = () => {
+export const Home = () => {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(false);
   const currentUserInfo = useCurrentUserInfo();
@@ -49,5 +49,3 @@ const Home = () => {
     </Container>
   );
 };
-
-export default Home;

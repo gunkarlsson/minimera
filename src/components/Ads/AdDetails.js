@@ -1,7 +1,7 @@
 import React from "react";
-import AdCard from "./AdCard";
+import { AdCard } from "./AdCard";
 
-const AdDetails = () => {
+export const AdDetails = () => {
   const Mailto = ({ email, subject, body, ...props }) => {
     return (
       <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
@@ -20,8 +20,6 @@ const AdDetails = () => {
     </div>
   );
 };
-
-export default AdDetails;
 
 // const Mailto = ({ email, subject = "", body = "", children }) => {
 //   let params = subject || body ? "?" : "";

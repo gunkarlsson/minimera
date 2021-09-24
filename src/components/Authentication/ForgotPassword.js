@@ -1,8 +1,17 @@
 import React, { useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import {
+  Typography,
+  Button,
+  Container,
+  TextField,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from "@mui/material";
 
-export default function ForgotPassword() {
+export const ForgotPassword = () => {
   const emailRef = useRef();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
@@ -27,21 +36,23 @@ export default function ForgotPassword() {
 
   return (
     <>
-      <section>
-        <button onClick={() => history.goBack()}>Go back</button>
-        <h2>Password Reset</h2>
+      <Container>
+        <Button variant="outlined" onClick={() => history.goBack()}>
+          Go back
+        </Button>
+        <Typography variant="h4" align="center" gutterBottom>
+          Password Reset
+        </Typography>
         {error && <div>{error}</div>}
         {message && <div>{message}</div>}
         <form onSubmit={handleSubmit}>
-          <div>
-            <input type="email" placeholder="Email" ref={emailRef} required />
-          </div>
+          <TextField type="email" placeholder="Email" ref={emailRef} required />
 
-          <button disabled={loading} type="submit">
+          <Button variant="outlined" disabled={loading} type="submit">
             Reset Password
-          </button>
+          </Button>
         </form>
-      </section>
+      </Container>
     </>
   );
-}
+};

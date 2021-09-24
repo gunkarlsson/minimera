@@ -7,14 +7,12 @@ import {
   Button,
   Container,
   TextField,
-  Radio,
-  RadioGroup,
   FormControlLabel,
   FormControl,
   FormLabel,
-} from "@material-ui/core";
+} from "@mui/material";
 
-export default function UpdateProfile() {
+export const UpdateProfile = () => {
   const emailRef = useRef();
   const [newEmail, setNewEmail] = useState();
   const passwordRef = useRef();
@@ -115,4 +113,4 @@ export default function UpdateProfile() {
       </Container>
     </>
   );
-}
+};

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { getDoc, doc } from "firebase/firestore";
 //getDoc is the latest version syntax from firestore
 
-const useCurrentUserInfo = () => {
+export const useCurrentUserInfo = () => {
   const { currentUser } = useAuth();
   const [userInfo, setUserInfo] = useState();
 
@@ -21,5 +21,3 @@ const useCurrentUserInfo = () => {
 
   return userInfo;
 };
-
-export default useCurrentUserInfo;

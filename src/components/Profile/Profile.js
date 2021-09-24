@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
-import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
-import { Button, Container, Typography } from "@material-ui/core";
+import { useCurrentUserInfo } from "../../hooks/useCurrentUserInfo";
+import { Button, Container, Typography } from "@mui/material";
 
-const Profile = () => {
+export const Profile = () => {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
@@ -48,5 +48,3 @@ const Profile = () => {
     </Container>
   );
 };
-
-export default Profile;

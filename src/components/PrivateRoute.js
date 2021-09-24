@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import * as ROUTES from "../constants/routes";
 
-export default function PrivateRoute({ component: Component, ...rest }) {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
   //we get the component from the current route, then rename it to Component
   //...rest = then all the other properties will be there
   const { currentUser } = useAuth();
@@ -23,4 +23,4 @@ export default function PrivateRoute({ component: Component, ...rest }) {
       ></Route>
     </div>
   );
-}
+};

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
-import useCurrentUserInfo from "../../hooks/useCurrentUserInfo";
-
+import { useCurrentUserInfo } from "../../hooks/useCurrentUserInfo";
+import { useHistory } from "react-router";
 import {
   Typography,
   Button,
@@ -14,10 +14,8 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
-} from "@material-ui/core";
-import KeyboardArrowRightRoundedIcon from "@material-ui/icons/KeyboardArrowRightRounded";
-import { makeStyles } from "@material-ui/core/";
-import { useHistory } from "react-router";
+} from "@mui/material";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   field: {
@@ -27,7 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CreateAd = () => {
+export const CreateAd = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const { currentUser } = useAuth();
@@ -37,7 +35,7 @@ const CreateAd = () => {
   const history = useHistory();
   const [titleError, setTitleError] = useState(false);
   const [descError, setDescError] = useState(false);
-  const [category, setCategory] = useState("todos");
+  const [category, setCategory] = useState("övrigt");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,6 +44,7 @@ const CreateAd = () => {
       title,
       desc,
       id: uuidv4(),
+      category,
       userId: currentUser.uid,
       userEmail: currentUser.email,
       userName: currentUserInfo.name,
@@ -134,7 +133,6 @@ const CreateAd = () => {
           type="submit"
           color="secondary"
           variant="contained"
-          endIcon={<KeyboardArrowRightRoundedIcon />}
           disableElevation
         >
           Submit
@@ -143,5 +141,3 @@ const CreateAd = () => {
     </Container>
   );
 };
-
-export default CreateAd;

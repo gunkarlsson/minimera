@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
-import AdCard from "./AdCard";
-import { Button, Container, Typography } from "@material-ui/core";
+import { AdCard } from "./AdCard";
+import { Container, Typography } from "@mui/material";
 
-const MyAds = () => {
+export const MyAds = () => {
   const [myAds, setMyAds] = useState([]);
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
@@ -49,18 +49,6 @@ const MyAds = () => {
           <AdCard ad={ad} deleteAd={deleteAd} />
         </div>
       ))}
-      {/* {myAds.map((ad) => (
-        <div className="ad" key={ad.id}>
-          <h2>{ad.title}</h2>
-          <p>{ad.desc}</p>
-          <div>
-            <button onClick={() => deleteAd(ad)}>X</button>
-            <button>Edit (no onClick)</button>
-          </div>
-        </div>
-      ))} */}
     </Container>
   );
 };
-
-export default MyAds;
