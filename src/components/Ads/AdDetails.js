@@ -1,23 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AdCard } from "./AdCard";
+import { useParams, useHistory } from "react-router-dom";
+import { db } from "../../firebase";
+import { Button, Container } from "@mui/material";
+import { FaAngleLeft } from "react-icons/fa";
+
+const Mailto = ({ email, subject, body, ...props }) => {
+  return (
+    <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
+      {props.children}
+    </a>
+  );
+};
 
 export const AdDetails = () => {
-  const Mailto = ({ email, subject, body, ...props }) => {
-    return (
-      <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
-        {props.children}
-      </a>
-    );
-  };
+  let { id } = useParams();
+  const history = useHistory();
+  const [adDetails, setAdDetails] = useState();
+
+  useEffect(() => {
+    db.collection("allAds")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        setAdDetails(doc.data());
+      });
+  }, []);
 
   return (
-    <div>
-      Ad details
-      <AdCard />
+    <Container>
+      <Button
+        sx={{
+          color: "text.secondary",
+          padding: "15px 0 0 0",
+          justifyContent: "flex-start",
+        }}
+        onClick={() => history.goBack()}
+      >
+        <FaAngleLeft size="2em" title="back" />
+      </Button>
+
+      {adDetails && <AdCard ad={adDetails} />}
       <Mailto email="test@test.se" subject="Hello" body="Hello world!">
         Contact
       </Mailto>
-    </div>
+    </Container>
   );
 };
 

@@ -1,71 +1,84 @@
-import { FaTrashAlt } from "react-icons/fa";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import {
+  Avatar,
   Card,
   CardHeader,
   CardContent,
   CardActionArea,
-  IconButton,
   Typography,
-  Avatar,
   capitalize,
 } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import { teal, amber } from "@mui/material/colors";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import { AdDetails } from "./AdDetails";
+import { useParams, useHistory } from "react-router-dom";
 
-export const AdCard = ({ ad, deleteAd }) => {
+const useStyles = makeStyles({
+  card: {
+    margin: "15px 5px",
+  },
+  cardHeader: {
+    display: "flex",
+    flexDirection: "row",
+  },
+});
+
+export const AdCard = ({ ad, deleteAd, link, editAd }) => {
   const { currentUser } = useAuth();
   const isMyAd = ad.userId === currentUser.uid;
+  const classes = useStyles(ad);
+  const history = useHistory();
+
+  const routeChange = () => {
+    let path = `/edit-ad/ + ad.id`;
+    history.push(path);
+  };
 
   return (
-    <Card elevation={1}>
-      <CardActionArea>
-        <CardHeader
-          sx={{
-            borderBottom: 1,
-            justifyContent: "center",
-          }}
-          avatar={
-            <Avatar
-              sx={isMyAd ? { bgcolor: amber[400] } : { bgcolor: teal[400] }}
-            >
-              {ad.category[0].toUpperCase()}
-            </Avatar>
-          }
-          title={<Typography variant="h6">{ad.title}</Typography>}
-          subheader={
-            <Typography variant="subtitle2" color="textSecondary">
-              {capitalize(ad.category)}
+    <>
+      <Card elevation={1} className={classes.card}>
+        <CardActionArea>
+          <CardHeader
+            avatar={
+              <Avatar
+                sx={isMyAd ? { bgcolor: amber[400] } : { bgcolor: teal[400] }}
+              >
+                {ad.category[0].toUpperCase()}
+              </Avatar>
+            }
+            title={<Typography variant="h6">{ad.title}</Typography>}
+            subheader={
+              <Typography variant="subtitle2" color="textSecondary">
+                {capitalize(ad.category)}
+              </Typography>
+            }
+          />
+          <CardContent>
+            <Typography variant="body1" gutterBottom>
+              {ad.desc}
             </Typography>
-          }
-          action={
-            <IconButton
-              size="small"
-              onClick={() => {
-                const confirmBox = window.confirm(
-                  "Are you sure you want to delete ad?"
-                );
-                if (confirmBox === true) {
-                  deleteAd(ad);
-                }
-              }}
-            >
-              <FaTrashAlt />
-            </IconButton>
-          }
-        />
 
-        <CardContent>
-          <Typography variant="body1" gutterBottom>
-            {ad.desc}
-          </Typography>
-
-          <Typography variant="body2">
-            {ad.area}, {ad.userName}, {ad.userEmail}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+            <Typography variant="body2">
+              {ad.area}, {ad.userName}, {ad.userEmail}
+            </Typography>
+            {link && <Link to={link}>To details</Link>}
+            {deleteAd && (
+              <FaTrashAlt
+                onClick={() => {
+                  const confirmBox = window.confirm(
+                    "Are you sure you want to delete ad?"
+                  );
+                  if (confirmBox === true) {
+                    deleteAd(ad);
+                  }
+                }}
+              />
+            )}
+            {editAd && <FaEdit onClick={routeChange} />}
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </>
   );
 };

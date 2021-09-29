@@ -18,10 +18,15 @@ import {
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: "block",
+  form: {
+    display: "flex",
+    flexDirection: "column",
+    field: {
+      marginTop: "20px",
+      marginBottom: 20,
+      display: "block",
+      border: "1px solid red",
+    },
   },
 });
 
@@ -39,6 +44,8 @@ export const CreateAd = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTitleError(false);
+    setDescError(false);
 
     const newAd = {
       title,
@@ -51,10 +58,18 @@ export const CreateAd = () => {
       area: currentUserInfo.area,
     };
 
-    db.collection("allAds").doc(newAd.id).set(newAd);
-    setTitle("");
-    setDesc("");
-    history.push("/");
+    if (title === "") {
+      setTitleError(true);
+    }
+    if (desc === "") {
+      setDescError(true);
+    }
+    if (title && desc) {
+      db.collection("allAds").doc(newAd.id).set(newAd);
+      setTitle("");
+      setDesc("");
+      history.push("/");
+    }
   };
 
   // const createAd = () => {
@@ -73,23 +88,25 @@ export const CreateAd = () => {
 
   return (
     <Container>
-      <Typography variant="h4" align="center" gutterBottom>
-        Lägg till ny annons
-      </Typography>
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+      <Typography variant="h1">Lägg till ny annons</Typography>
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className={classes.form}
+      >
         <TextField
           onChange={(e) => setTitle(e.target.value)}
-          className={classes.field}
           label="Rubrik"
           variant="outlined"
           color="secondary"
           fullWidth
           required
           error={titleError}
+          className={classes.field}
         />
         <TextField
           onChange={(e) => setDesc(e.target.value)}
-          className={classes.field}
           label="Beskrivning"
           variant="outlined"
           color="secondary"

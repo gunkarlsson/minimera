@@ -40,9 +40,7 @@ export const ForgotPassword = () => {
         <Button variant="outlined" onClick={() => history.goBack()}>
           Go back
         </Button>
-        <Typography variant="h4" align="center" gutterBottom>
-          Password Reset
-        </Typography>
+        <Typography variant="h2">Password Reset</Typography>
         {error && <div>{error}</div>}
         {message && <div>{message}</div>}
         <form onSubmit={handleSubmit}>

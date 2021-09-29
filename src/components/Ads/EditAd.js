@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
+import { Button, Container, Typography } from "@mui/material";
+import { FaAngleLeft } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 export const EditAd = () => {
   const [myAds, setMyAds] = useState([]);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const { currentUser } = useAuth();
 
@@ -56,8 +60,20 @@ export const EditAd = () => {
   };
 
   return (
-    <div>
-      <h1>My Ads</h1>
+    <Container>
+      <Button
+        sx={{
+          color: "text.secondary",
+          padding: "15px 0 0 0",
+          justifyContent: "flex-start",
+        }}
+        onClick={() => history.goBack()}
+      >
+        <FaAngleLeft size="2em" title="back" />
+      </Button>
+
+      <Typography variant="h2">Ändra i annons</Typography>
+
       <form onSubmit={handleSubmit}>
         <h3>Edit ads</h3>
         <input
@@ -94,6 +110,6 @@ export const EditAd = () => {
           </div>
         </div>
       ))}
-    </div>
+    </Container>
   );
 };

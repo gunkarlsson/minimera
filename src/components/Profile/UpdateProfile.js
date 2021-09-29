@@ -67,11 +67,18 @@ export const UpdateProfile = () => {
   return (
     <>
       <Container>
-        <Button onClick={() => history.goBack()}>
+        <Button
+          sx={{
+            color: "text.secondary",
+            padding: "15px 0 0 0",
+            justifyContent: "flex-start",
+          }}
+          onClick={() => history.goBack()}
+        >
           <FaAngleLeft size="2em" title="back" />
         </Button>
 
-        <Typography component="h2">Update profile</Typography>
+        <Typography variant="h2">Uppdatera profil</Typography>
 
         {error && <div>{error}</div>}
         {message && <div>{message}</div>}
@@ -85,10 +92,11 @@ export const UpdateProfile = () => {
           </div>
 
           {/* <TextField
+            inputRef={emailRef}
             label="Email"
             variant="standard"
             color="secondary"
-            defaultValue={currentUser.email}
+            // defaultValue={currentUser.email}
             fullWidth
             required
           /> */}
@@ -96,18 +104,18 @@ export const UpdateProfile = () => {
           <div>
             <input type="password" ref={passwordRef} required />
             <label>
-              <span>Password</span>
+              <span>Lösenord</span>
             </label>
           </div>
           <div>
             <input type="password" ref={passwordConfirmRef} required />
             <label>
-              <span>Confirm password</span>
+              <span>Bekräfta lösenord</span>
             </label>
           </div>
 
           <Button variant="contained" disabled={loading} type="submit">
-            Save changes
+            Spara ändringar
           </Button>
         </form>
       </Container>

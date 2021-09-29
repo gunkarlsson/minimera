@@ -54,9 +54,7 @@ export const Signup = () => {
   return (
     <>
       <Container>
-        <Typography variant="h4" align="center" gutterBottom>
-          Sign Up
-        </Typography>
+        <Typography variant="h1">Sign Up</Typography>
 
         <form onSubmit={handleSubmit}>
           <div>

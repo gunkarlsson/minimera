@@ -8,8 +8,8 @@ export const PROFILE = "/profile";
 export const HOME = "/home";
 export const UPDATE_PROFILE = "/update-profile";
 export const AD_CARD = "/ad-card";
-export const AD_DETAILS = "/ad-details";
-export const EDIT_AD = "/edit-ad";
+export const AD_DETAILS = "/ad-details/:id";
+export const EDIT_AD = "/edit-ad/:id";
 
 export const YOU = "/you";
 export const HAVE_READ = "/have-read";

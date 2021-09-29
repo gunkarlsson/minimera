@@ -24,7 +24,7 @@ export const Profile = () => {
 
   return (
     <Container>
-      <Typography component="h1">{currentUserInfo?.name}'s profil</Typography>
+      <Typography variant="h1">{currentUserInfo?.name}'s profil</Typography>
       {/* ^ borde vara en template string literal för att bli conditional rendered */}
       <Typography component="h3">email: {currentUser.email}</Typography>
       <Typography component="h3">userId: {currentUser.uid}</Typography>

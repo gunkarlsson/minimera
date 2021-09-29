@@ -36,9 +36,7 @@ export const Login = () => {
   return (
     <>
       <Container>
-        <Typography variant="h4" align="center" gutterBottom>
-          Log In
-        </Typography>
+        <Typography variant="h1">Log In</Typography>
         {error && <div>{error}</div>}
         <form onSubmit={handleSubmit}>
           <div>

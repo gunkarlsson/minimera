@@ -6,13 +6,14 @@ const useStyles = makeStyles(() => {
   return {
     root: {
       display: "flex",
-      border: "1px solid red",
+      height: "100%",
+      background: "#f9f9f9",
     },
     page: {
-      background: "#f9f9f9",
       width: "100%",
-      height: "calc(100vh - 60px)",
-      border: "1px solid blue",
+      overflow: "scroll",
+      // height: "100vh",
+      height: "calc(100vh - 59px)",
       // padding: theme.spacing(2),
       //spacing takes the base spacing (8px) * 3 = 24 px
     },

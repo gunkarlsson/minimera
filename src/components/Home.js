@@ -35,15 +35,13 @@ export const Home = () => {
 
   return (
     <Container>
-      <Typography variant="h4" align="center" gutterBottom>
-        Annonser i {currentUserInfo?.area}
-      </Typography>
+      <Typography variant="h1">Annonser i {currentUserInfo?.area}</Typography>
 
       {loading ? <h1>Loading...</h1> : null}
 
       {ads.map((ad) => (
         <div className="ad" key={ad.id}>
-          <AdCard ad={ad} />
+          <AdCard ad={ad} link={"/ad-details/" + ad.id} />
         </div>
       ))}
     </Container>
