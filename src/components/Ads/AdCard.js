@@ -24,7 +24,14 @@ const useStyles = makeStyles({
   },
 });
 
-export const AdCard = ({ ad, deleteAd, link, editAd }) => {
+const Mailto = ({ email, subject, body, ...props }) => {
+  return (
+    <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
+      {props.children}
+    </a>
+  );
+};
+export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
   const { currentUser } = useAuth();
   const isMyAd = ad.userId === currentUser.uid;
   const classes = useStyles(ad);
@@ -62,7 +69,18 @@ export const AdCard = ({ ad, deleteAd, link, editAd }) => {
             <Typography variant="body2">
               {ad.area}, {ad.userName}, {ad.userEmail}
             </Typography>
+
             {link && <Link to={link}>To details</Link>}
+            {mailto && (
+              <Mailto
+                Mailto
+                email="test@test.se"
+                subject="Hello"
+                body="Hello world!"
+              >
+                Contact
+              </Mailto>
+            )}
             {deleteAd && (
               <FaTrashAlt
                 onClick={() => {

@@ -2,9 +2,17 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useAuth } from "../../context/AuthContext";
-import { Button, Container, Typography } from "@mui/material";
+import {
+  Button,
+  Container,
+  Typography,
+  TextField,
+  FormControlLabel,
+  FormControl,
+  FormLabel,
+} from "@mui/material";
 import { FaAngleLeft } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 export const EditAd = () => {
   const [myAds, setMyAds] = useState([]);
@@ -12,7 +20,7 @@ export const EditAd = () => {
   const [desc, setDesc] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-
+  // let { id } = useParams();
   const { currentUser } = useAuth();
 
   const handleSubmit = (e) => {
@@ -21,26 +29,35 @@ export const EditAd = () => {
     setDesc("");
   };
 
-  const ref = db.collection("allAds");
+  // const ref = db.collection("allAds");
 
-  const getAds = () => {
-    setLoading(true);
-    ref.where("userId", "==", currentUser.uid).onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
-      });
-      setMyAds(items);
-      setLoading(false);
-    });
-  };
+  // const getAds = () => {
+  //   setLoading(true);
+  //   ref.where("userId", "==", currentUser.uid).onSnapshot((querySnapshot) => {
+  //     const items = [];
+  //     querySnapshot.forEach((doc) => {
+  //       items.push(doc.data());
+  //     });
+  //     setMyAds(items);
+  //     setLoading(false);
+  //   });
+  // };
 
-  useEffect(() => {
-    getAds();
-  }, []);
+  // useEffect(() => {
+  //   getAds();
+  // }, []);
+
+  // useEffect(() => {
+  //   db.collection("allAds")
+  //     .doc(id)
+  //     .get()
+  //     .then((doc) => {
+  //       console.log(doc.data());
+  //     });
+  // }, []);
 
   const deleteAd = (ad) => {
-    ref
+    db.collection("allAds")
       .doc(ad.id)
       .delete()
       .catch((err) => {
@@ -50,7 +67,7 @@ export const EditAd = () => {
 
   const editAd = (updatedAd) => {
     setLoading();
-    ref
+    db.collection("allAds")
       .doc(updatedAd.id)
       .update(updatedAd)
       //could as well use set()
@@ -95,8 +112,7 @@ export const EditAd = () => {
       </form>
 
       {loading ? <h1>Loading...</h1> : null}
-
-      {myAds.map((ad) => (
+      {/* {myAds.map((ad) => (
         <div className="ad" key={ad.id}>
           <h2>{ad.title}</h2>
           <p>{ad.desc}</p>
@@ -109,7 +125,7 @@ export const EditAd = () => {
             </button>
           </div>
         </div>
-      ))}
+      ))} */}
     </Container>
   );
 };

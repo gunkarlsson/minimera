@@ -17,13 +17,16 @@ export const AdDetails = () => {
   let { id } = useParams();
   const history = useHistory();
   const [adDetails, setAdDetails] = useState();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     db.collection("allAds")
       .doc(id)
       .get()
       .then((doc) => {
         setAdDetails(doc.data());
+        setLoading(false);
       });
   }, []);
 
@@ -40,10 +43,7 @@ export const AdDetails = () => {
         <FaAngleLeft size="2em" title="back" />
       </Button>
 
-      {adDetails && <AdCard ad={adDetails} />}
-      <Mailto email="test@test.se" subject="Hello" body="Hello world!">
-        Contact
-      </Mailto>
+      {adDetails && <AdCard ad={adDetails} mailto={Mailto} />}
     </Container>
   );
 };
