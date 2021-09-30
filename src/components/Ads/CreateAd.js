@@ -21,12 +21,7 @@ const useStyles = makeStyles({
   form: {
     display: "flex",
     flexDirection: "column",
-    field: {
-      marginTop: "20px",
-      marginBottom: 20,
-      display: "block",
-      border: "1px solid red",
-    },
+    padding: "10px",
   },
 });
 
@@ -72,20 +67,6 @@ export const CreateAd = () => {
     }
   };
 
-  // const createAd = () => {
-  //   const newAd = {
-  //     title,
-  //     desc,
-  //     id: uuidv4(),
-  //     userId: currentUser.uid,
-  //     userEmail: currentUser.email,
-  //     userName: currentUserInfo.name,
-  //     area: currentUserInfo.area,
-  //   };
-
-  //   db.collection("allAds").doc(newAd.id).set(newAd);
-  // };
-
   return (
     <Container>
       <Typography variant="h1">Lägg till ny annons</Typography>
@@ -96,6 +77,7 @@ export const CreateAd = () => {
         className={classes.form}
       >
         <TextField
+          sx={{ marginTop: "10px", marginBottom: "10px" }}
           onChange={(e) => setTitle(e.target.value)}
           label="Rubrik"
           variant="outlined"
@@ -103,9 +85,9 @@ export const CreateAd = () => {
           fullWidth
           required
           error={titleError}
-          className={classes.field}
         />
         <TextField
+          sx={{ marginTop: "10px", marginBottom: "20px" }}
           onChange={(e) => setDesc(e.target.value)}
           label="Beskrivning"
           variant="outlined"
@@ -117,11 +99,12 @@ export const CreateAd = () => {
           error={descError}
         />
 
-        <FormControl className={classes.field}>
+        <FormControl>
           <FormLabel>Kategori</FormLabel>
           <RadioGroup
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            sx={{ marginLeft: "5px", marginBottom: "50px" }}
           >
             <FormControlLabel
               value="bygg"

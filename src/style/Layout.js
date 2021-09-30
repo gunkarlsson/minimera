@@ -1,6 +1,7 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Navbar } from "../components/Navbar";
+import { Container } from "@mui/material";
 
 const useStyles = makeStyles(() => {
   return {
@@ -24,9 +25,9 @@ export const Layout = ({ children }) => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <main className={classes.root}>
       <Navbar />
       <div className={classes.page}>{children}</div>
-    </div>
+    </main>
   );
 };
