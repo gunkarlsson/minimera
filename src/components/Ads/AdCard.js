@@ -1,6 +1,7 @@
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import {
   Avatar,
+  Box,
   Card,
   CardHeader,
   CardContent,
@@ -56,7 +57,12 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
   const classes = useStyles(ad);
   const history = useHistory();
 
-  const routeChange = () => {
+  const routeChangeDetails = () => {
+    let path = `/ad-details/ + ad.id`;
+    history.push(path);
+  };
+
+  const routeChangeEdit = () => {
     let path = `/edit-ad/ + ad.id`;
     history.push(path);
   };
@@ -74,7 +80,7 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
       >
         <CardActionArea>
           <CardHeader
-            sx={{ p: 2 }}
+            sx={{ p: 2, pb: 1 }}
             avatar={
               <Avatar sx={{ bgcolor: categoryColor() }}>
                 {ad.category[0].toUpperCase()}
@@ -87,14 +93,22 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
               </Typography>
             }
           />
-          <CardContent>
-            <Typography variant="body1" gutterBottom>
+          <CardContent sx={{ pt: 0 }}>
+            <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
               {ad.desc}
             </Typography>
 
-            <Typography variant="body2">Utlånas av {ad.userName}</Typography>
+            <Box sx={{ display: "flex", flexDirection: "row" }}>
+              <Typography variant="body2" sx={{ flexGrow: 1 }}>
+                Utlånas av {ad.userName}
+              </Typography>
 
-            {link && <Link to={link}>To details</Link>}
+              {link && (
+                <Typography variant="body2">
+                  <Link to={link}>Läs mer</Link>
+                </Typography>
+              )}
+            </Box>
             {mailto && (
               <Mailto
                 Mailto
@@ -117,7 +131,7 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
                 }}
               />
             )}
-            {editAd && <FaEdit onClick={routeChange} />}
+            {editAd && <FaEdit onClick={routeChangeEdit} />}
           </CardContent>
         </CardActionArea>
       </Card>
