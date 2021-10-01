@@ -17,7 +17,17 @@ export const About = () => {
   return (
     <Container>
       <Typography variant="h1">Hur funkar det?</Typography>
-      <Card className={classes.card} elevation={2}>
+      <Card
+        elevation={0}
+        sx={{
+          borderRadius: 2,
+          mx: 1,
+          my: 3,
+          px: 3,
+          py: 2,
+          boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
+        }}
+      >
         <Typography variant="h6" gutterBottom sx={{ margin: "5px 0 15px 0" }}>
           Varför behövs minimera?
         </Typography>
@@ -27,7 +37,16 @@ export const About = () => {
           vi annars kan dela med varandra.
         </Typography>
       </Card>
-      <Card className={classes.card} elevation={2}>
+      <Card
+        sx={{
+          borderRadius: 2,
+          mx: 1,
+          my: 3,
+          px: 3,
+          py: 2,
+          boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
+        }}
+      >
         <Typography variant="h6" gutterBottom sx={{ margin: "5px 0 15px 0" }}>
           Att låna av någon
         </Typography>
@@ -43,7 +62,16 @@ export const About = () => {
           upphämtning och återlämning själva
         </Typography>
       </Card>
-      <Card className={classes.card} elevation={2}>
+      <Card
+        sx={{
+          borderRadius: 2,
+          mx: 1,
+          my: 3,
+          px: 3,
+          py: 2,
+          boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
+        }}
+      >
         <Typography variant="h6" gutterBottom sx={{ margin: "5px 0 15px 0" }}>
           Att låna ut till någon
         </Typography>

@@ -9,15 +9,21 @@ import {
   capitalize,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { teal, amber } from "@mui/material/colors";
+import {
+  teal,
+  amber,
+  pink,
+  blue,
+  green,
+  indigo,
+  yellow,
+  orange,
+} from "@mui/material/colors";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useParams, useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
-  card: {
-    margin: "15px 5px",
-  },
   cardHeader: {
     display: "flex",
     flexDirection: "row",
@@ -33,7 +39,20 @@ const Mailto = ({ email, subject, body, ...props }) => {
 };
 export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
   const { currentUser } = useAuth();
-  const isMyAd = ad.userId === currentUser.uid;
+  // const isMyAd = ad.userId === currentUser.uid;
+
+  const categoryColor = () => {
+    if (ad.category === "bygg") {
+      return pink[300];
+    } else if (ad.category === "hem") {
+      return amber[400];
+    } else if (ad.category === "sport") {
+      return teal[400];
+    } else {
+      return blue[400];
+    }
+  };
+
   const classes = useStyles(ad);
   const history = useHistory();
 
@@ -44,13 +63,20 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
 
   return (
     <>
-      <Card elevation={1} className={classes.card}>
+      <Card
+        elevation={0}
+        sx={{
+          borderRadius: 2,
+          mx: 1,
+          my: 2,
+          boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
+        }}
+      >
         <CardActionArea>
           <CardHeader
+            sx={{ p: 2 }}
             avatar={
-              <Avatar
-                sx={isMyAd ? { bgcolor: amber[400] } : { bgcolor: teal[400] }}
-              >
+              <Avatar sx={{ bgcolor: categoryColor() }}>
                 {ad.category[0].toUpperCase()}
               </Avatar>
             }
@@ -66,9 +92,7 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
               {ad.desc}
             </Typography>
 
-            <Typography variant="body2">
-              {ad.area}, {ad.userName}, {ad.userEmail}
-            </Typography>
+            <Typography variant="body2">Utlånas av {ad.userName}</Typography>
 
             {link && <Link to={link}>To details</Link>}
             {mailto && (
