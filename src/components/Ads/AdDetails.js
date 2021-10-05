@@ -42,6 +42,7 @@ export const AdDetails = () => {
       >
         <FaAngleLeft size="2em" title="back" />
       </Button>
+      {loading ? <h1>Loading...</h1> : null}
 
       {adDetails && <AdCard ad={adDetails} mailto={Mailto} />}
     </Container>

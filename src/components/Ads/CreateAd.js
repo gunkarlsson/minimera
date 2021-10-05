@@ -85,6 +85,7 @@ export const CreateAd = () => {
           fullWidth
           required
           error={titleError}
+          inputProps={{ maxLength: 35 }}
         />
         <TextField
           sx={{ marginTop: "10px", marginBottom: "20px" }}
@@ -97,6 +98,7 @@ export const CreateAd = () => {
           fullWidth
           required
           error={descError}
+          inputProps={{ maxLength: 400 }}
         />
 
         <FormControl>

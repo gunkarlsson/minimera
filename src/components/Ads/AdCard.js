@@ -9,7 +9,6 @@ import {
   Typography,
   capitalize,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import {
   teal,
   amber,
@@ -24,13 +23,6 @@ import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useParams, useHistory } from "react-router-dom";
 
-const useStyles = makeStyles({
-  cardHeader: {
-    display: "flex",
-    flexDirection: "row",
-  },
-});
-
 const Mailto = ({ email, subject, body, ...props }) => {
   return (
     <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
@@ -38,8 +30,12 @@ const Mailto = ({ email, subject, body, ...props }) => {
     </a>
   );
 };
+
 export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
   const { currentUser } = useAuth();
+  const history = useHistory();
+  const descFull = ad.desc;
+  const descSummary = ad.desc;
   // const isMyAd = ad.userId === currentUser.uid;
 
   const categoryColor = () => {
@@ -53,9 +49,6 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
       return blue[400];
     }
   };
-
-  const classes = useStyles(ad);
-  const history = useHistory();
 
   const routeChangeDetails = () => {
     let path = `/ad-details/ + ad.id`;
@@ -80,7 +73,7 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
       >
         <CardActionArea>
           <CardHeader
-            sx={{ p: 2, pb: 1 }}
+            sx={{ display: "flex", flexDirection: "row", p: 2, pb: 1 }}
             avatar={
               <Avatar sx={{ bgcolor: categoryColor() }}>
                 {ad.category[0].toUpperCase()}
@@ -94,6 +87,15 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
             }
           />
           <CardContent sx={{ pt: 0 }}>
+            {/* {descsummary ? (
+              <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
+                {ad.desc.toUpperCase()}
+              </Typography>
+            ) : (
+              <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
+                {ad.desc}
+              </Typography>
+            )} */}
             <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
               {ad.desc}
             </Typography>
@@ -110,14 +112,16 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
               )}
             </Box>
             {mailto && (
-              <Mailto
-                Mailto
-                email="test@test.se"
-                subject="Hello"
-                body="Hello world!"
-              >
-                Contact
-              </Mailto>
+              <Typography variant="body1">
+                <Mailto
+                  Mailto
+                  email="test@test.se"
+                  subject="Hello"
+                  body="Hello world!"
+                >
+                  Email {ad.userName}
+                </Mailto>{" "}
+              </Typography>
             )}
             {deleteAd && (
               <FaTrashAlt

@@ -32,7 +32,6 @@ export const Profile = () => {
   const [error, setError] = useState("");
   const { logout } = useAuth();
   const history = useHistory();
-  const { currentUser } = useAuth();
   const currentUserInfo = useCurrentUserInfo();
   const classes = useStyles();
 
@@ -52,11 +51,7 @@ export const Profile = () => {
         {currentUserInfo?.name}'s profil
       </Typography>
       <Box className={classes.box}>
-        <img
-          className={classes.image}
-          src={smiley}
-          alt="profile-picture-smiley"
-        />
+        <img className={classes.image} src={smiley} alt="profile-pic-smiley" />
         {/* ^ borde vara en template string literal för att bli conditional rendered */}
         <Button
           color="secondary"
@@ -101,7 +96,7 @@ export const Profile = () => {
             }
           }}
         >
-          Log out
+          Logga ut
         </Button>
       </Box>
     </Container>

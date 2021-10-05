@@ -5,19 +5,19 @@ import { db } from "../../firebase";
 import {
   Typography,
   Button,
+  Box,
   Container,
   TextField,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
   FormControl,
   FormLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 
 export const Signup = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
   const [name, setName] = useState();
   const [area, setArea] = useState("norr");
   const [error, setError] = useState("");
@@ -28,24 +28,21 @@ export const Signup = () => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+    if (password !== passwordConfirm) {
+      return setError("Lösenorden matchar ej");
     }
     try {
       setError("");
       setLoading(true);
 
-      let newUser = await signup(
-        emailRef.current.value,
-        passwordRef.current.value
-      );
+      let newUser = await signup(email, password);
 
       db.collection("users")
         .doc(newUser.user.uid)
-        .set({ name, area, email: emailRef.current.value });
+        .set({ name, area, email: email });
       history.push("/");
     } catch {
-      setError("Failed to create an account");
+      setError("Misslyckades med att skapa konto");
     } finally {
       setLoading(false);
     }
@@ -54,61 +51,83 @@ export const Signup = () => {
   return (
     <>
       <Container>
-        <Typography variant="h1">Sign Up</Typography>
-
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              required
+        <Typography variant="h1">Skapa konto</Typography>
+        <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              sx={{ marginTop: "10px", marginBottom: "10px" }}
               onChange={(e) => setName(e.target.value)}
-            />
-            {/* <input type="text" placeholder="Name" ref={nameRef} required /> */}
-          </div>
-          <div>
-            <input type="email" placeholder="Email" ref={emailRef} required />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              ref={passwordRef}
+              label="Namn"
+              variant="outlined"
+              color="secondary"
+              fullWidth
               required
+              aria-label="email input"
             />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Repeat password"
-              ref={passwordConfirmRef}
+            <TextField
+              sx={{ marginTop: "10px", marginBottom: "10px" }}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Email"
+              variant="outlined"
+              color="secondary"
+              fullWidth
               required
+              aria-label="email input"
             />
-          </div>
-          <div>
-            <label>Stadsdel i Stockholm:</label>
-            <select value={area} onChange={(e) => setArea(e.target.value)}>
-              <option value="norr">Norr</option>
-              <option value="östra">Östra</option>
-              <option value="västra">Västra</option>
-              <option value="söder">Söder</option>
-              <option value="centrum">Centrum</option>
-            </select>
-            {/* <select ref={areaRef} required>
-              <option value="north">Norr</option>
-              <option value="east">Östra</option>
-              <option value="west">Västra</option>
-              <option value="south">Söder</option>
-              <option value="center">Centrum</option>
-            </select> */}
-          </div>
-          <Button variant="outlined" disabled={loading} type="submit">
-            Sign Up
-          </Button>
-          {error && <div className="error">{error}</div>}
-          <Link to="/login"> Already have an account? Login</Link>
-        </form>
+
+            <TextField
+              sx={{ mt: "10px", mb: "5px" }}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              label="Lösenord"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              required
+              aria-label="password input"
+            />
+            <TextField
+              sx={{ mt: "10px", mb: "5px" }}
+              type="password"
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              label="Bekräfta lösenord"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              required
+              aria-label="password confirmation"
+            />
+
+            <FormControl required sx={{ width: "100%" }}>
+              <FormLabel>Stadsdel</FormLabel>
+              <Select
+                value={area}
+                onChange={(e) => setArea(e.target.value)}
+                label="Stadsdel"
+              >
+                <MenuItem value="norr">Norr</MenuItem>
+                <MenuItem value="östra">Östra</MenuItem>
+                <MenuItem value="västra">Västra</MenuItem>
+                <MenuItem value="söder">Söder</MenuItem>
+                <MenuItem value="centrum">Centrum</MenuItem>
+              </Select>
+            </FormControl>
+
+            <Button
+              sx={{ width: "100%", mt: "100px", mb: "5px" }}
+              variant="contained"
+              disableElevation
+              disabled={loading}
+              type="submit"
+            >
+              Skapa konto
+            </Button>
+            {error && <div className="error">{error}</div>}
+            <Typography variant="body2" sx={{ textAlign: "right" }}>
+              <Link to="/login"> Redan medlem? Logga in</Link>
+            </Typography>
+          </form>
+        </Box>
       </Container>
     </>
   );

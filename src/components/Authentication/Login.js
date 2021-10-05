@@ -1,19 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { Link, useHistory } from "react-router-dom";
-import {
-  Typography,
-  Button,
-  Container,
-  TextField,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-} from "@mui/material";
+import { Typography, Button, Container, TextField, Box } from "@mui/material";
 
 export const Login = () => {
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,7 +17,7 @@ export const Login = () => {
     try {
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
+      await login(email, password);
       setLoading(false);
       history.push("/");
     } catch {
@@ -36,26 +28,56 @@ export const Login = () => {
   return (
     <>
       <Container>
-        <Typography variant="h1">Log In</Typography>
+        <Typography variant="h1">Logga in</Typography>
         {error && <div>{error}</div>}
-        <form onSubmit={handleSubmit}>
-          <div>
-            <input type="email" placeholder="Email" ref={emailRef} required />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              ref={passwordRef}
+        <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              sx={{ marginTop: "10px", marginBottom: "10px" }}
+              onChange={(e) => setEmail(e.target.value)}
+              label="Email"
+              variant="outlined"
+              color="secondary"
+              fullWidth
               required
+              aria-label="email input"
             />
-          </div>
-          <Link to="/forgot-password">Forgot Password?</Link>
-          <Button variant="outlined" disabled={loading} type="submit">
-            Log In
-          </Button>
-          <Link to="/signup"> Need an account? Sign Up</Link>
-        </form>
+
+            <TextField
+              sx={{ mt: "10px", mb: "5px" }}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              label="Lösenord"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              required
+              aria-label="password input"
+            />
+
+            <Typography variant="body2" sx={{ textAlign: "right" }}>
+              <Link to="/forgot-password">Glömt lösenord?</Link>{" "}
+            </Typography>
+
+            <Button
+              sx={{ width: "100%", mt: "100px", mb: "10px" }}
+              variant="contained"
+              disableElevation
+              disabled={loading}
+              type="submit"
+            >
+              Logga in
+            </Button>
+            <Typography
+              variant="body2"
+              sx={{
+                textAlign: "right",
+              }}
+            >
+              <Link to="/signup">Inte medlem? Skapa konto</Link>
+            </Typography>
+          </form>
+        </Box>
       </Container>
     </>
   );

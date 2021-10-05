@@ -51,9 +51,8 @@ export const App = () => {
         <AuthProvider>
           <Layout>
             <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path={ROUTES.HOME} component={Home} />
-
+              <PrivateRoute exact path="/" component={Home} />
+              <PrivateRoute path={ROUTES.HOME} component={Home} />
               <PrivateRoute path={ROUTES.PROFILE} component={Profile} />
               <PrivateRoute
                 path={ROUTES.UPDATE_PROFILE}

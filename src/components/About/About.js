@@ -1,19 +1,7 @@
 import React from "react";
 import { Card, Container, Typography } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles((theme) => {
-  return {
-    card: {
-      margin: "25px 10px",
-      padding: "15px 25px",
-    },
-  };
-});
 
 export const About = () => {
-  const classes = useStyles();
-
   return (
     <Container>
       <Typography variant="h1">Hur funkar det?</Typography>
