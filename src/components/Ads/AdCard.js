@@ -2,6 +2,7 @@ import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   CardHeader,
   CardContent,
@@ -21,7 +22,7 @@ import {
 } from "@mui/material/colors";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
-import { useParams, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const Mailto = ({ email, subject, body, ...props }) => {
   return (
@@ -31,11 +32,16 @@ const Mailto = ({ email, subject, body, ...props }) => {
   );
 };
 
-export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
+export const AdCard = ({
+  ad,
+  deleteAd,
+  link,
+  editAd,
+  mailto,
+  noWrap = false,
+}) => {
   const { currentUser } = useAuth();
   const history = useHistory();
-  const descFull = ad.desc;
-  const descSummary = ad.desc;
   // const isMyAd = ad.userId === currentUser.uid;
 
   const categoryColor = () => {
@@ -71,73 +77,76 @@ export const AdCard = ({ ad, deleteAd, link, editAd, mailto }) => {
           boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <CardActionArea>
-          <CardHeader
-            sx={{ display: "flex", flexDirection: "row", p: 2, pb: 1 }}
-            avatar={
-              <Avatar sx={{ bgcolor: categoryColor() }}>
-                {ad.category[0].toUpperCase()}
-              </Avatar>
-            }
-            title={<Typography variant="h6">{ad.title}</Typography>}
-            subheader={
-              <Typography variant="subtitle2" color="textSecondary">
-                {capitalize(ad.category)}
-              </Typography>
-            }
-          />
-          <CardContent sx={{ pt: 0 }}>
-            {/* {descsummary ? (
-              <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
-                {ad.desc.toUpperCase()}
-              </Typography>
-            ) : (
-              <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
-                {ad.desc}
-              </Typography>
-            )} */}
-            <Typography variant="body1" sx={{ pb: 2 }} gutterBottom>
-              {ad.desc}
+        <CardHeader
+          sx={{ display: "flex", flexDirection: "row", p: 2, pb: 1 }}
+          avatar={
+            <Avatar sx={{ bgcolor: categoryColor() }}>
+              {ad.category[0].toUpperCase()}
+            </Avatar>
+          }
+          title={<Typography variant="h6">{ad.title}</Typography>}
+          subheader={
+            <Typography variant="subtitle2" color="textSecondary">
+              {capitalize(ad.category)}
+            </Typography>
+          }
+        />
+        <CardContent sx={{ pt: 0 }}>
+          <Typography
+            noWrap={noWrap}
+            variant="body1"
+            sx={{ pb: 2 }}
+            gutterBottom
+          >
+            {ad.desc}
+          </Typography>
+
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body2" sx={{ flexGrow: 1 }}>
+              Utlånas av {ad.userName}
             </Typography>
 
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
-              <Typography variant="body2" sx={{ flexGrow: 1 }}>
-                Utlånas av {ad.userName}
+            {link && (
+              <Typography variant="body2">
+                <Link to={link}>Läs mer</Link>
               </Typography>
+            )}
+          </Box>
 
-              {link && (
-                <Typography variant="body2">
-                  <Link to={link}>Läs mer</Link>
-                </Typography>
-              )}
-            </Box>
-            {mailto && (
-              <Typography variant="body1">
-                <Mailto
-                  Mailto
-                  email="test@test.se"
-                  subject="Hello"
-                  body="Hello world!"
-                >
-                  Email {ad.userName}
-                </Mailto>{" "}
-              </Typography>
-            )}
-            {deleteAd && (
-              <FaTrashAlt
-                onClick={() => {
-                  const confirmBox = window.confirm(
-                    "Are you sure you want to delete ad?"
-                  );
-                  if (confirmBox === true) {
-                    deleteAd(ad);
-                  }
-                }}
-              />
-            )}
-            {editAd && <FaEdit onClick={routeChangeEdit} />}
-          </CardContent>
-        </CardActionArea>
+          {mailto && (
+            <Button
+              variant="outlined"
+              sx={{
+                width: "100%",
+                mt: "10px",
+                mb: "10px",
+              }}
+            >
+              <Mailto
+                Mailto
+                email={ad.userEmail}
+                subject={`Annons "${ad.title}"`}
+                body={`Hej! Jag skriver angående din annons "${ad.title}" på minimera.`}
+              >
+                Kontakta {ad.userName}
+              </Mailto>
+            </Button>
+          )}
+
+          {deleteAd && (
+            <FaTrashAlt
+              onClick={() => {
+                const confirmBox = window.confirm(
+                  "Are you sure you want to delete ad?"
+                );
+                if (confirmBox === true) {
+                  deleteAd(ad);
+                }
+              }}
+            />
+          )}
+          {editAd && <FaEdit onClick={routeChangeEdit} />}
+        </CardContent>
       </Card>
     </>
   );

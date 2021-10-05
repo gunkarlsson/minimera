@@ -6,3 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: "Syne";
 }
+
+a {
+  color: inherit;
+}

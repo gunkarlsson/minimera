@@ -1,22 +1,21 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { FaAngleLeft } from "react-icons/fa";
 import {
   Typography,
   Button,
+  Box,
   Container,
   TextField,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
+  FormHelperText,
 } from "@mui/material";
 
 export const UpdateProfile = () => {
-  const emailRef = useRef();
-  const [newEmail, setNewEmail] = useState();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
+
   const { currentUser, updatePassword, updateEmail } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -26,35 +25,37 @@ export const UpdateProfile = () => {
   function handleSubmit(e) {
     e.preventDefault();
     setMessage("");
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+    if (password !== passwordConfirm) {
+      return setError("Lösenorden matchar ej");
     }
 
     const promises = [];
     setLoading(true);
     setError("");
 
-    if (emailRef.current.value !== currentUser.email) {
+    if (email !== currentUser.email) {
       //if we've changed the email, we want to add that promise to the array
       //we call the updateEmail-function with our current email, and add this to the array of promises
       //we want to do all the promises before we throw an error
-      promises.push(updateEmail(emailRef.current.value));
+      promises.push(updateEmail(email));
     }
-    if (passwordRef.current.value) {
-      promises.push(updatePassword(passwordRef.current.value));
+    if (password) {
+      promises.push(updatePassword(password));
     }
 
     Promise.all(promises)
       //we pass in the array of promises,
       //when all the promises finishes and are successful, then history.push will execute
       .then(() => {
-        setMessage("Profile was successfully updated.");
+        setMessage("Kontot har nu uppdaterats");
       })
-      //   .then(() => {
-      //     history.push("/");
-      //   })
+      .then(() => {
+        history.push("/");
+      })
       .catch(() => {
-        setError("Failed to update account. Try logging out and in again");
+        setError(
+          "Misslyckades med att uppdatera konto. Pröva att logga ut och in igen."
+        );
         //Probably "Credentials are too old, you need to log in again"-error?
         //https://firebase.google.com/docs/reference/js/firebase.User#reauthenticatewithcredential
       })
@@ -80,44 +81,60 @@ export const UpdateProfile = () => {
 
         <Typography variant="h2">Uppdatera profil</Typography>
 
-        {error && <div>{error}</div>}
-        {message && <div>{message}</div>}
+        {error && <Typography>{error}</Typography>}
+        {message && <Typography>{message}</Typography>}
 
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <div>
-            <input type="email" ref={emailRef} required />
-            <label>
-              <span>{currentUser.email}</span>
-            </label>
-          </div>
+        <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+            <TextField
+              sx={{ marginTop: "10px", marginBottom: "10px" }}
+              onChange={(e) => setEmail(e.target.value)}
+              label={currentUser.email}
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              aria-label="email input"
+            />
 
-          {/* <TextField
-            inputRef={emailRef}
-            label="Email"
-            variant="standard"
-            color="secondary"
-            // defaultValue={currentUser.email}
-            fullWidth
-            required
-          /> */}
+            <TextField
+              sx={{ mt: "10px" }}
+              type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              label="Lösenord"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              required
+              aria-label="password input"
+              id="password-input"
+            />
+            <FormHelperText id="password-input">
+              Lösenordet måste vara minst 6 tecken
+            </FormHelperText>
 
-          <div>
-            <input type="password" ref={passwordRef} required />
-            <label>
-              <span>Lösenord</span>
-            </label>
-          </div>
-          <div>
-            <input type="password" ref={passwordConfirmRef} required />
-            <label>
-              <span>Bekräfta lösenord</span>
-            </label>
-          </div>
+            <TextField
+              sx={{ mt: "10px", mb: "5px" }}
+              type="password"
+              onChange={(e) => setPasswordConfirm(e.target.value)}
+              label="Bekräfta lösenord"
+              variant="outlined"
+              color="secondary"
+              fullWidth
+              required
+              aria-label="password confirmation"
+            />
 
-          <Button variant="contained" disabled={loading} type="submit">
-            Spara ändringar
-          </Button>
-        </form>
+            <Button
+              sx={{ width: "100%", mt: "50px" }}
+              variant="contained"
+              disableElevation
+              disabled={loading}
+              type="submit"
+            >
+              Spara ändringar
+            </Button>
+          </form>
+        </Box>
       </Container>
     </>
   );

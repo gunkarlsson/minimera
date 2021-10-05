@@ -1,11 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { Typography, Button, Container, TextField, Box } from "@mui/material";
 import { FaAngleLeft } from "react-icons/fa";
 
 export const ForgotPassword = () => {
-  const emailRef = useRef();
   const { resetPassword } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -54,9 +53,6 @@ export const ForgotPassword = () => {
               required
               aria-label="email input"
             />
-
-            {/* <TextField type="email" placeholder="Email" ref={emailRef} required /> */}
-
             <Button
               sx={{ width: "100%", mt: "50px", mb: "10px" }}
               variant="outlined"

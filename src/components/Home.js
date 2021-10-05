@@ -41,7 +41,7 @@ export const Home = () => {
 
       {ads.map((ad) => (
         <div className="ad" key={ad.id}>
-          <AdCard ad={ad} link={"/ad-details/" + ad.id} />
+          <AdCard ad={ad} link={"/ad-details/" + ad.id} noWrap={true} />
         </div>
       ))}
     </Container>
