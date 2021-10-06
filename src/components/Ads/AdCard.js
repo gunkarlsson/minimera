@@ -19,6 +19,7 @@ import {
   indigo,
   yellow,
   orange,
+  purple,
 } from "@mui/material/colors";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
@@ -56,13 +57,20 @@ export const AdCard = ({
     }
   };
 
-  const routeChangeDetails = () => {
-    let path = `/ad-details/ + ad.id`;
-    history.push(path);
+  const categoryTitle = () => {
+    if (ad.category === "bygg") {
+      return "Bygg & verktyg";
+    } else if (ad.category === "hem") {
+      return "Hem & trädgård";
+    } else if (ad.category === "sport") {
+      return "Sport & fritid";
+    } else {
+      return "Övrigt";
+    }
   };
 
   const routeChangeEdit = () => {
-    let path = `/edit-ad/ + ad.id`;
+    let path = `/edit-ad/ + ${ad.id}`;
     history.push(path);
   };
 
@@ -77,7 +85,7 @@ export const AdCard = ({
           boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <CardHeader
+        {/* <CardHeader
           sx={{ display: "flex", flexDirection: "row", p: 2, pb: 1 }}
           avatar={
             <Avatar sx={{ bgcolor: categoryColor() }}>
@@ -90,18 +98,45 @@ export const AdCard = ({
               {capitalize(ad.category)}
             </Typography>
           }
+        /> */}
+        <CardHeader
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            p: 1.8,
+            bgcolor: categoryColor(),
+            height: "1px",
+          }}
+          title={
+            <Typography variant="subtitle2" color="white">
+              {categoryTitle()}
+            </Typography>
+          }
         />
-        <CardContent sx={{ pt: 0 }}>
+        <CardContent
+          sx={{
+            "&: last-child": {
+              paddingBottom: 1.8,
+            },
+          }}
+        >
+          <Typography variant="h6">{ad.title}</Typography>
+
           <Typography
+            sx={{ pb: 2 }}
             noWrap={noWrap}
             variant="body1"
-            sx={{ pb: 2 }}
             gutterBottom
           >
             {ad.desc}
           </Typography>
 
-          <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
             <Typography variant="body2" sx={{ flexGrow: 1 }}>
               Utlånas av {ad.userName}
             </Typography>
@@ -119,7 +154,6 @@ export const AdCard = ({
               sx={{
                 width: "100%",
                 mt: "10px",
-                mb: "10px",
               }}
             >
               <Mailto

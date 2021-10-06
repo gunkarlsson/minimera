@@ -36,6 +36,7 @@ export const CreateAd = () => {
   const [titleError, setTitleError] = useState(false);
   const [descError, setDescError] = useState(false);
   const [category, setCategory] = useState("övrigt");
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -63,7 +64,7 @@ export const CreateAd = () => {
       db.collection("allAds").doc(newAd.id).set(newAd);
       setTitle("");
       setDesc("");
-      history.push("/");
+      setSuccess(true);
     }
   };
 
@@ -85,7 +86,7 @@ export const CreateAd = () => {
           fullWidth
           required
           error={titleError}
-          inputProps={{ maxLength: 35 }}
+          inputProps={{ maxLength: 30 }}
         />
         <TextField
           sx={{ marginTop: "10px", marginBottom: "20px" }}
@@ -137,9 +138,17 @@ export const CreateAd = () => {
           variant="contained"
           disableElevation
         >
-          Submit
+          Skapa annons
         </Button>
       </form>
+      {success && (
+        <Typography
+          onClick={() => history.goBack()}
+          sx={{ p: "10px", textDecoration: "underline" }}
+        >
+          Klart! Klicka för att gå tillbaka.
+        </Typography>
+      )}
     </Container>
   );
 };

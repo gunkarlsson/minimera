@@ -53,11 +53,11 @@ export const MyAds = () => {
       </Button>
       <Typography variant="h2">Mina annonser</Typography>
 
-      {loading ? <h1>Loading...</h1> : null}
+      {loading ? <Typography variant="h6">Loading...</Typography> : null}
 
       {myAds.map((ad) => (
         <div className="ad" key={ad.id}>
-          <AdCard ad={ad} deleteAd={deleteAd} editAd={"/edit-ad/" + ad.id} />
+          <AdCard ad={ad} deleteAd={deleteAd} editAd />
         </div>
       ))}
     </Container>

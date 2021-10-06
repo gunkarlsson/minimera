@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { AdCard } from "./AdCard";
 import { useParams, useHistory } from "react-router-dom";
 import { db } from "../../firebase";
-import { Button, Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import { FaAngleLeft } from "react-icons/fa";
 
 const Mailto = ({ email, subject, body, ...props }) => {
@@ -42,7 +42,7 @@ export const AdDetails = () => {
       >
         <FaAngleLeft size="2em" title="back" />
       </Button>
-      {loading ? <h1>Loading...</h1> : null}
+      {loading ? <Typography variant="h6">Loading...</Typography> : null}
 
       {adDetails && <AdCard ad={adDetails} mailto={Mailto} />}
     </Container>

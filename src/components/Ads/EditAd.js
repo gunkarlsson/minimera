@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { FaAngleLeft } from "react-icons/fa";
 import { useParams, useHistory } from "react-router-dom";
+import { AdCard } from "./AdCard";
 
 export const EditAd = () => {
   const [myAds, setMyAds] = useState([]);
@@ -20,7 +21,6 @@ export const EditAd = () => {
   const [desc, setDesc] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  // let { id } = useParams();
   const { currentUser } = useAuth();
 
   const handleSubmit = (e) => {
@@ -28,6 +28,22 @@ export const EditAd = () => {
     setTitle("");
     setDesc("");
   };
+
+  //TEST
+  let { id } = useParams();
+  const [adDetails, setAdDetails] = useState();
+
+  useEffect(() => {
+    setLoading(true);
+    db.collection("allAds")
+      .doc(id)
+      .get()
+      .then((doc) => {
+        setAdDetails(doc.data());
+        setLoading(false);
+        console.log("test");
+      });
+  }, []);
 
   // const ref = db.collection("allAds");
 
@@ -88,30 +104,32 @@ export const EditAd = () => {
       >
         <FaAngleLeft size="2em" title="back" />
       </Button>
-
       <Typography variant="h2">Ändra i annons</Typography>
+      {/* <AdCard ad={adDetails} /> */}
 
+      {loading ? <Typography variant="h6">Loading...</Typography> : null}
       <form onSubmit={handleSubmit}>
-        <h3>Edit ads</h3>
-        <input
+        <TextField
           required
           type="text"
           value={title}
           placeholder="Title"
           onChange={(e) => setTitle(e.target.value)}
         />
-        <textarea
+        <TextField
           required
           value={desc}
           placeholder="Description"
           onChange={(e) => setDesc(e.target.value)}
         />
-        <button onClick={() => editAd({ title, desc, id: uuidv4() })}>
+        <Button
+          variant="outlined"
+          onClick={() => editAd({ title, desc, id: uuidv4() })}
+        >
           Submit
-        </button>
+        </Button>
       </form>
 
-      {loading ? <h1>Loading...</h1> : null}
       {/* {myAds.map((ad) => (
         <div className="ad" key={ad.id}>
           <h2>{ad.title}</h2>
@@ -126,6 +144,7 @@ export const EditAd = () => {
           </div>
         </div>
       ))} */}
+      {/* <AdCard ad={ad} link={"/ad-details/" + ad.id} /> */}
     </Container>
   );
 };

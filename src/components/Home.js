@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../firebase";
 import { useCurrentUserInfo } from "../hooks/useCurrentUserInfo";
 import { AdCard } from "./Ads/AdCard";
-import { Typography, Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 export const Home = () => {
   const [ads, setAds] = useState([]);
@@ -37,7 +37,7 @@ export const Home = () => {
     <Container>
       <Typography variant="h1">Annonser i {currentUserInfo?.area}</Typography>
 
-      {loading ? <h1>Loading...</h1> : null}
+      {loading ? <Typography variant="h2">Loading...</Typography> : null}
 
       {ads.map((ad) => (
         <div className="ad" key={ad.id}>

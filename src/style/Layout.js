@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Navbar } from "../components/Navbar";
-import { Container } from "@mui/material";
 
 const useStyles = makeStyles(() => {
   return {
