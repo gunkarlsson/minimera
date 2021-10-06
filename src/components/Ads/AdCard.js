@@ -1,4 +1,7 @@
 import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { MdEdit, MdModeEdit, MdDelete } from "react-icons/md";
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
+
 import {
   Avatar,
   Box,
@@ -135,16 +138,35 @@ export const AdCard = ({
             sx={{
               display: "flex",
               flexDirection: "row",
+              alignItems: "bottom",
             }}
           >
             <Typography variant="body2" sx={{ flexGrow: 1 }}>
               Utlånas av {ad.userName}
             </Typography>
-
             {link && (
               <Typography variant="body2">
                 <Link to={link}>Läs mer</Link>
               </Typography>
+            )}
+
+            {deleteAd && (
+              <MdDelete
+                size={25}
+                onClick={() => {
+                  const confirmBox = window.confirm(
+                    "Are you sure you want to delete ad?"
+                  );
+                  if (confirmBox === true) {
+                    deleteAd(ad);
+                  }
+                }}
+              />
+            )}
+            {editAd && (
+              <Link to={editAd}>
+                <MdEdit size={25} />
+              </Link>
             )}
           </Box>
 
@@ -166,20 +188,6 @@ export const AdCard = ({
               </Mailto>
             </Button>
           )}
-
-          {deleteAd && (
-            <FaTrashAlt
-              onClick={() => {
-                const confirmBox = window.confirm(
-                  "Are you sure you want to delete ad?"
-                );
-                if (confirmBox === true) {
-                  deleteAd(ad);
-                }
-              }}
-            />
-          )}
-          {editAd && <FaEdit onClick={routeChangeEdit} />}
         </CardContent>
       </Card>
     </>

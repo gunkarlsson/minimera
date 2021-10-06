@@ -40,8 +40,8 @@ export const Home = () => {
       {loading ? <Typography variant="h2">Loading...</Typography> : null}
 
       {ads.map((ad) => (
-        <div className="ad" key={ad.id}>
-          <AdCard ad={ad} link={"/ad-details/" + ad.id} noWrap={true} />
+        <div key={ad.id}>
+          <AdCard ad={ad} link={"/ad-details/" + ad.id} noWrap />
         </div>
       ))}
     </Container>

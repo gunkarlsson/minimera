@@ -143,7 +143,7 @@ export const CreateAd = () => {
       </form>
       {success && (
         <Typography
-          onClick={() => history.goBack()}
+          onClick={() => history.push("/")}
           sx={{ p: "10px", textDecoration: "underline" }}
         >
           Klart! Klicka för att gå tillbaka.

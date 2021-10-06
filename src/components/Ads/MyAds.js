@@ -12,18 +12,18 @@ export const MyAds = () => {
   const { currentUser } = useAuth();
   const history = useHistory();
 
-  const ref = db.collection("allAds");
-
   const getAds = () => {
     setLoading(true);
-    ref.where("userId", "==", currentUser.uid).onSnapshot((querySnapshot) => {
-      const items = [];
-      querySnapshot.forEach((doc) => {
-        items.push(doc.data());
+    db.collection("allAds")
+      .where("userId", "==", currentUser.uid)
+      .onSnapshot((querySnapshot) => {
+        const items = [];
+        querySnapshot.forEach((doc) => {
+          items.push(doc.data());
+        });
+        setMyAds(items);
+        setLoading(false);
       });
-      setMyAds(items);
-      setLoading(false);
-    });
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export const MyAds = () => {
   }, []);
 
   const deleteAd = (ad) => {
-    ref
+    db.collection("allAds")
       .doc(ad.id)
       .delete()
       .catch((err) => {
@@ -56,8 +56,13 @@ export const MyAds = () => {
       {loading ? <Typography variant="h6">Loading...</Typography> : null}
 
       {myAds.map((ad) => (
-        <div className="ad" key={ad.id}>
-          <AdCard ad={ad} deleteAd={deleteAd} editAd />
+        <div key={ad.id}>
+          <AdCard
+            ad={ad}
+            deleteAd={deleteAd}
+            editAd={"/edit-ad/" + ad.id}
+            noWrap
+          />
         </div>
       ))}
     </Container>
