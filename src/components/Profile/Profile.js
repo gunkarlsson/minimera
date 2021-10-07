@@ -6,6 +6,7 @@ import { useCurrentUserInfo } from "../../hooks/useCurrentUserInfo";
 import { Box, Button, Container, Typography } from "@mui/material";
 import smiley from "../../img/smiley.svg";
 import { makeStyles } from "@mui/styles";
+import { AlertDialog } from "../AlertDialog";
 
 const useStyles = makeStyles({
   box: {
@@ -41,7 +42,7 @@ export const Profile = () => {
       await logout();
       history.push("/");
     } catch {
-      setError("Failed to log out");
+      setError("Misslyckades med att logga ut");
     }
   }
 
@@ -98,6 +99,7 @@ export const Profile = () => {
         >
           Logga ut
         </Button>
+        <AlertDialog />
       </Box>
     </Container>
   );

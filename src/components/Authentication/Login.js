@@ -21,7 +21,7 @@ export const Login = () => {
       setLoading(false);
       history.push("/");
     } catch {
-      setError("Failed to log in");
+      setError("Misslyckades med inloggning");
     }
   }
 

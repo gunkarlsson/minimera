@@ -155,7 +155,7 @@ export const AdCard = ({
                 size={25}
                 onClick={() => {
                   const confirmBox = window.confirm(
-                    "Are you sure you want to delete ad?"
+                    "Är du säker på att du vill ta bort annonsen?"
                   );
                   if (confirmBox === true) {
                     deleteAd(ad);
