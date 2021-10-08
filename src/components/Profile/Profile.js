@@ -41,7 +41,7 @@ export const Profile = () => {
     try {
       await logout();
       history.push("/");
-    } catch {
+    } catch (e) {
       setError("Misslyckades med att logga ut");
     }
   }
@@ -49,7 +49,7 @@ export const Profile = () => {
   return (
     <Container>
       <Typography variant="h1" marginBottom="0">
-        {currentUserInfo?.name}'s profil
+        {currentUserInfo.name}'s profil
       </Typography>
       <Box className={classes.box}>
         <img className={classes.image} src={smiley} alt="profile-pic-smiley" />

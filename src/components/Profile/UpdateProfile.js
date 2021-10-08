@@ -66,78 +66,76 @@ export const UpdateProfile = () => {
   }
 
   return (
-    <>
-      <Container>
-        <Button
-          sx={{
-            color: "text.secondary",
-            padding: "15px 0 0 0",
-            justifyContent: "flex-start",
-          }}
-          onClick={() => history.goBack()}
-        >
-          <KeyboardArrowLeftRoundedIcon fontSize="large" />
-        </Button>
+    <Container>
+      <Button
+        sx={{
+          color: "text.secondary",
+          padding: "15px 0 0 0",
+          justifyContent: "flex-start",
+        }}
+        onClick={() => history.goBack()}
+      >
+        <KeyboardArrowLeftRoundedIcon fontSize="large" />
+      </Button>
 
-        <Typography component="h1" variant="h2">
-          Uppdatera profil
-        </Typography>
+      <Typography component="h1" variant="h2">
+        Uppdatera profil
+      </Typography>
 
-        {error && <Typography>{error}</Typography>}
-        {message && <Typography>{message}</Typography>}
+      {error && <Typography>{error}</Typography>}
+      {message && <Typography>{message}</Typography>}
 
-        <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField
-              sx={{ marginTop: "10px", marginBottom: "10px" }}
-              onChange={(e) => setEmail(e.target.value)}
-              label={currentUser.email}
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              aria-label="email input"
-            />
+      <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <TextField
+            sx={{ marginTop: "10px", marginBottom: "10px" }}
+            onChange={(e) => setEmail(e.target.value)}
+            label={currentUser.email}
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            aria-label="email input"
+          />
 
-            <TextField
-              sx={{ mt: "10px" }}
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              label="Lösenord"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              required
-              aria-label="password input"
-              id="password-input"
-            />
-            <FormHelperText id="password-input">
-              Lösenordet måste vara minst 6 tecken
-            </FormHelperText>
+          <TextField
+            sx={{ mt: "10px" }}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            label="Lösenord"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            required
+            aria-label="password input"
+            id="password-input"
+          />
+          <FormHelperText id="password-input">
+            Lösenordet måste vara minst 6 tecken
+          </FormHelperText>
 
-            <TextField
-              sx={{ mt: "10px", mb: "5px" }}
-              type="password"
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              label="Bekräfta lösenord"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              required
-              aria-label="password confirmation"
-            />
+          <TextField
+            sx={{ mt: "10px", mb: "5px" }}
+            type="password"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            label="Bekräfta lösenord"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            required
+            aria-label="password confirmation"
+          />
 
-            <Button
-              sx={{ width: "100%", mt: "50px" }}
-              variant="contained"
-              disableElevation
-              disabled={loading}
-              type="submit"
-            >
-              Spara ändringar
-            </Button>
-          </form>
-        </Box>
-      </Container>
-    </>
+          <Button
+            sx={{ width: "100%", mt: "50px" }}
+            variant="contained"
+            disableElevation
+            disabled={loading}
+            type="submit"
+          >
+            Spara ändringar
+          </Button>
+        </form>
+      </Box>
+    </Container>
   );
 };

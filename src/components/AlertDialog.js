@@ -21,7 +21,7 @@ export const AlertDialog = () => {
     setOpen(false);
   };
   return (
-    <>
+    <Box>
       <Button variant="outlined" onClick={handleClickOpen}>
         Logga ut dialog
       </Button>
@@ -57,6 +57,6 @@ export const AlertDialog = () => {
           </Button>
         </DialogActions>
       </Dialog>
-    </>
+    </Box>
   );
 };

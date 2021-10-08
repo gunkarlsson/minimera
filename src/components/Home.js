@@ -36,7 +36,7 @@ export const Home = () => {
   return (
     <Container>
       <Typography component="h1" variant="h1">
-        Annonser i {currentUserInfo?.area}
+        Annonser i {currentUserInfo.area}
       </Typography>
 
       {loading ? (

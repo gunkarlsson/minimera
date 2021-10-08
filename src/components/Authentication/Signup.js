@@ -41,7 +41,7 @@ export const Signup = () => {
         .doc(newUser.user.uid)
         .set({ name, area, email: email });
       history.push("/");
-    } catch {
+    } catch (e) {
       setError("Misslyckades med att skapa konto");
     } finally {
       setLoading(false);
@@ -49,86 +49,84 @@ export const Signup = () => {
   }
 
   return (
-    <>
-      <Container>
-        <Typography variant="h1">Skapa konto</Typography>
-        <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
-          <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-            <TextField
-              sx={{ marginTop: "10px", marginBottom: "10px" }}
-              onChange={(e) => setName(e.target.value)}
-              label="Namn"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              required
-              aria-label="email input"
-            />
-            <TextField
-              sx={{ marginTop: "10px", marginBottom: "10px" }}
-              onChange={(e) => setEmail(e.target.value)}
-              label="Email"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              required
-              aria-label="email input"
-            />
+    <Container>
+      <Typography variant="h1">Skapa konto</Typography>
+      <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <TextField
+            sx={{ marginTop: "10px", marginBottom: "10px" }}
+            onChange={(e) => setName(e.target.value)}
+            label="Namn"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            required
+            aria-label="email input"
+          />
+          <TextField
+            sx={{ marginTop: "10px", marginBottom: "10px" }}
+            onChange={(e) => setEmail(e.target.value)}
+            label="Email"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            required
+            aria-label="email input"
+          />
 
-            <TextField
-              sx={{ mt: "10px", mb: "5px" }}
-              type="password"
-              onChange={(e) => setPassword(e.target.value)}
-              label="Lösenord"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              required
-              aria-label="password input"
-            />
-            <TextField
-              sx={{ mt: "10px", mb: "5px" }}
-              type="password"
-              onChange={(e) => setPasswordConfirm(e.target.value)}
-              label="Bekräfta lösenord"
-              variant="outlined"
-              color="secondary"
-              fullWidth
-              required
-              aria-label="password confirmation"
-            />
+          <TextField
+            sx={{ mt: "10px", mb: "5px" }}
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            label="Lösenord"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            required
+            aria-label="password input"
+          />
+          <TextField
+            sx={{ mt: "10px", mb: "5px" }}
+            type="password"
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+            label="Bekräfta lösenord"
+            variant="outlined"
+            color="secondary"
+            fullWidth
+            required
+            aria-label="password confirmation"
+          />
 
-            <FormControl required sx={{ width: "100%" }}>
-              <FormLabel>Stadsdel</FormLabel>
-              <Select
-                value={area}
-                onChange={(e) => setArea(e.target.value)}
-                label="Stadsdel"
-              >
-                <MenuItem value="norr">Norr</MenuItem>
-                <MenuItem value="östra">Östra</MenuItem>
-                <MenuItem value="västra">Västra</MenuItem>
-                <MenuItem value="söder">Söder</MenuItem>
-                <MenuItem value="centrum">Centrum</MenuItem>
-              </Select>
-            </FormControl>
-
-            <Button
-              sx={{ width: "100%", mt: "100px", mb: "5px" }}
-              variant="contained"
-              disableElevation
-              disabled={loading}
-              type="submit"
+          <FormControl required sx={{ width: "100%" }}>
+            <FormLabel>Stadsdel</FormLabel>
+            <Select
+              value={area}
+              onChange={(e) => setArea(e.target.value)}
+              label="Stadsdel"
             >
-              Skapa konto
-            </Button>
-            {error && <div className="error">{error}</div>}
-            <Typography variant="body2" sx={{ textAlign: "right" }}>
-              <Link to="/login"> Redan medlem? Logga in</Link>
-            </Typography>
-          </form>
-        </Box>
-      </Container>
-    </>
+              <MenuItem value="norr">Norr</MenuItem>
+              <MenuItem value="östra">Östra</MenuItem>
+              <MenuItem value="västra">Västra</MenuItem>
+              <MenuItem value="söder">Söder</MenuItem>
+              <MenuItem value="centrum">Centrum</MenuItem>
+            </Select>
+          </FormControl>
+
+          <Button
+            sx={{ width: "100%", mt: "100px", mb: "5px" }}
+            variant="contained"
+            disableElevation
+            disabled={loading}
+            type="submit"
+          >
+            Skapa konto
+          </Button>
+          {error && <div className="error">{error}</div>}
+          <Typography variant="body2" sx={{ textAlign: "right" }}>
+            <Link to="/login"> Redan medlem? Logga in</Link>
+          </Typography>
+        </form>
+      </Box>
+    </Container>
   );
 };
