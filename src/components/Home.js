@@ -35,9 +35,15 @@ export const Home = () => {
 
   return (
     <Container>
-      <Typography variant="h1">Annonser i {currentUserInfo?.area}</Typography>
+      <Typography component="h1" variant="h1">
+        Annonser i {currentUserInfo?.area}
+      </Typography>
 
-      {loading ? <Typography variant="h2">Loading...</Typography> : null}
+      {loading ? (
+        <Typography component="h2" variant="h2">
+          Loading...
+        </Typography>
+      ) : null}
 
       {ads.map((ad) => (
         <div key={ad.id}>

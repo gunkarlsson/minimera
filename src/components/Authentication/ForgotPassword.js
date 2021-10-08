@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
 import { Typography, Button, Container, TextField, Box } from "@mui/material";
-import { FaAngleLeft } from "react-icons/fa";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 
 export const ForgotPassword = () => {
   const { resetPassword } = useAuth();
@@ -38,9 +38,11 @@ export const ForgotPassword = () => {
           }}
           onClick={() => history.goBack()}
         >
-          <FaAngleLeft size="2em" title="back" />
+          <KeyboardArrowLeftRoundedIcon fontSize="large" />
         </Button>
-        <Typography variant="h2">Glömt lösenord</Typography>
+        <Typography component="h1" variant="h2">
+          Glömt lösenord
+        </Typography>
         <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
           <form noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField

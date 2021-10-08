@@ -14,9 +14,8 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { FaAngleLeft } from "react-icons/fa";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 import { useParams, useHistory } from "react-router-dom";
-import { AdCard } from "./AdCard";
 import { useCurrentUserInfo } from "../../hooks/useCurrentUserInfo";
 
 export const EditAd = ({ ad }) => {
@@ -91,11 +90,17 @@ export const EditAd = ({ ad }) => {
         }}
         onClick={() => history.goBack()}
       >
-        <FaAngleLeft size="2em" title="back" />
+        <KeyboardArrowLeftRoundedIcon fontSize="large" />
       </Button>
-      <Typography variant="h2">Ändra i annons</Typography>
+      <Typography component="h1" variant="h2">
+        Ändra i annons
+      </Typography>
       {/* {chosenAd && <AdCard ad={chosenAd} />} */}
-      {loading ? <Typography variant="h6">Loading...</Typography> : null}
+      {loading ? (
+        <Typography component="h2" variant="h6">
+          Loading...
+        </Typography>
+      ) : null}
       {chosenAd && (
         <Box sx={{ p: 1 }}>
           <form onSubmit={handleSubmit}>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import { FaAngleLeft } from "react-icons/fa";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 import {
   Typography,
   Button,
@@ -76,10 +76,12 @@ export const UpdateProfile = () => {
           }}
           onClick={() => history.goBack()}
         >
-          <FaAngleLeft size="2em" title="back" />
+          <KeyboardArrowLeftRoundedIcon fontSize="large" />
         </Button>
 
-        <Typography variant="h2">Uppdatera profil</Typography>
+        <Typography component="h1" variant="h2">
+          Uppdatera profil
+        </Typography>
 
         {error && <Typography>{error}</Typography>}
         {message && <Typography>{message}</Typography>}

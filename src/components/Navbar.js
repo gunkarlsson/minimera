@@ -2,16 +2,10 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-// import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlinedIcon";
-// import InfoOutlinedIcon from "@mui/icons-material/InfoOutlinedIcon";
-// import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlinedIcon";
-// import HomeOutlinedIcon from "@mui/icons-material/HomeOutlinedIcon";
-import {
-  AddCircleOutlineOutlined,
-  InfoOutlined,
-  PersonOutlineOutlined,
-  HomeOutlined,
-} from "@material-ui/icons";
+import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
 
 const useStyles = makeStyles({
   stickToBottom: {
@@ -47,25 +41,25 @@ export const Navbar = () => {
           component={NavLink}
           to="/"
           label="Hem"
-          icon={<HomeOutlined />}
+          icon={<HomeRoundedIcon />}
         />
         <BottomNavigationAction
           component={NavLink}
           to="/create-ad"
           label="Ny annons"
-          icon={<AddCircleOutlineOutlined />}
+          icon={<AddCircleRoundedIcon />}
         />
         <BottomNavigationAction
           component={NavLink}
           to="/about"
           label="Om"
-          icon={<InfoOutlined />}
+          icon={<HelpCenterRoundedIcon />}
         />
         <BottomNavigationAction
           component={NavLink}
           to="/profile"
           label="Profil"
-          icon={<PersonOutlineOutlined />}
+          icon={<PersonRoundedIcon />}
         />
       </BottomNavigation>
     </>

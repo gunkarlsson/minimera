@@ -1,9 +1,6 @@
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
-import { MdEdit, MdModeEdit, MdDelete } from "react-icons/md";
-import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import {
-  Avatar,
   Box,
   Button,
   Card,
@@ -11,7 +8,6 @@ import {
   CardContent,
   CardActionArea,
   Typography,
-  capitalize,
 } from "@mui/material";
 import {
   teal,
@@ -111,7 +107,7 @@ export const AdCard = ({
             height: "1px",
           }}
           title={
-            <Typography variant="subtitle2" color="white">
+            <Typography component="h3" variant="subtitle2" color="white">
               {categoryTitle()}
             </Typography>
           }
@@ -123,7 +119,9 @@ export const AdCard = ({
             },
           }}
         >
-          <Typography variant="h6">{ad.title}</Typography>
+          <Typography component="h2" variant="h6">
+            {ad.title}
+          </Typography>
 
           <Typography
             sx={{ pb: 2 }}
@@ -151,7 +149,7 @@ export const AdCard = ({
             )}
 
             {deleteAd && (
-              <MdDelete
+              <DeleteIcon
                 size={25}
                 onClick={() => {
                   const confirmBox = window.confirm(
@@ -165,7 +163,7 @@ export const AdCard = ({
             )}
             {editAd && (
               <Link to={editAd}>
-                <MdEdit size={25} />
+                <EditRoundedIcon />
               </Link>
             )}
           </Box>

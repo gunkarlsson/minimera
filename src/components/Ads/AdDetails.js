@@ -3,7 +3,7 @@ import { AdCard } from "./AdCard";
 import { useParams, useHistory } from "react-router-dom";
 import { db } from "../../firebase";
 import { Button, Container, Typography } from "@mui/material";
-import { FaAngleLeft } from "react-icons/fa";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 
 const Mailto = ({ email, subject, body, ...props }) => {
   return (
@@ -40,9 +40,13 @@ export const AdDetails = () => {
         }}
         onClick={() => history.goBack()}
       >
-        <FaAngleLeft size="2em" title="back" />
+        <KeyboardArrowLeftRoundedIcon fontSize="large" />
       </Button>
-      {loading ? <Typography variant="h6">Loading...</Typography> : null}
+      {loading ? (
+        <Typography component="h2" variant="h6">
+          Loading...
+        </Typography>
+      ) : null}
 
       {adDetails && <AdCard ad={adDetails} mailto={Mailto} />}
     </Container>

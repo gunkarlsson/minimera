@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { useAuth } from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
-import { FaAngleLeft } from "react-icons/fa";
 import { AdCard } from "./AdCard";
 import { Button, Container, Typography } from "@mui/material";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 
 export const MyAds = () => {
   const [myAds, setMyAds] = useState([]);
@@ -49,11 +49,17 @@ export const MyAds = () => {
         }}
         onClick={() => history.goBack()}
       >
-        <FaAngleLeft size="2em" title="back" />
+        <KeyboardArrowLeftRoundedIcon fontSize="large" />
       </Button>
-      <Typography variant="h2">Mina annonser</Typography>
+      <Typography component="h1" variant="h2">
+        Mina annonser
+      </Typography>
 
-      {loading ? <Typography variant="h6">Loading...</Typography> : null}
+      {loading ? (
+        <Typography component="h2" variant="h6">
+          Loading...
+        </Typography>
+      ) : null}
 
       {myAds.map((ad) => (
         <div key={ad.id}>

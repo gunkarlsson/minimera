@@ -16,7 +16,12 @@ export const About = () => {
           boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h6" gutterBottom sx={{ margin: "5px 0 15px 0" }}>
+        <Typography
+          component="h2"
+          variant="h6"
+          gutterBottom
+          sx={{ margin: "5px 0 15px 0" }}
+        >
           Varför behövs minimera?
         </Typography>
 
@@ -35,7 +40,12 @@ export const About = () => {
           boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h6" gutterBottom sx={{ margin: "5px 0 15px 0" }}>
+        <Typography
+          component="h2"
+          variant="h6"
+          gutterBottom
+          sx={{ margin: "5px 0 15px 0" }}
+        >
           Att låna av någon
         </Typography>
 
@@ -60,7 +70,12 @@ export const About = () => {
           boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        <Typography variant="h6" gutterBottom sx={{ margin: "5px 0 15px 0" }}>
+        <Typography
+          component="h2"
+          variant="h6"
+          gutterBottom
+          sx={{ margin: "5px 0 15px 0" }}
+        >
           Att låna ut till någon
         </Typography>
 
