@@ -14,19 +14,27 @@ import {
   amber,
   pink,
   blue,
+  cyan,
   green,
   indigo,
   yellow,
   orange,
+  deepPurple,
   purple,
+  red,
+  deepOrange,
 } from "@mui/material/colors";
 import { useAuth } from "../../context/AuthContext";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { AlertDialog } from "../AlertDialog";
 
 const Mailto = ({ email, subject, body, ...props }) => {
   return (
-    <a href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}>
+    <a
+      style={{ textDecoration: "none" }}
+      href={`mailto:${email}?subject=${subject || ""}&body=${body || ""}`}
+    >
       {props.children}
     </a>
   );
@@ -48,11 +56,11 @@ export const AdCard = ({
     if (ad.category === "bygg") {
       return pink[300];
     } else if (ad.category === "hem") {
-      return amber[400];
+      return amber[500];
     } else if (ad.category === "sport") {
-      return teal[400];
+      return purple[500];
     } else {
-      return blue[400];
+      return blue[500];
     }
   };
 
@@ -84,20 +92,8 @@ export const AdCard = ({
           boxShadow: "2px 4px 12px rgba(0,0,0,0.1)",
         }}
       >
-        {/* <CardHeader
-          sx={{ display: "flex", flexDirection: "row", p: 2, pb: 1 }}
-          avatar={
-            <Avatar sx={{ bgcolor: categoryColor() }}>
-              {ad.category[0].toUpperCase()}
-            </Avatar>
-          }
-          title={<Typography variant="h6">{ad.title}</Typography>}
-          subheader={
-            <Typography variant="subtitle2" color="textSecondary">
-              {capitalize(ad.category)}
-            </Typography>
-          }
-        /> */}
+        {/* <CardActionArea component={Link} to={link}> */}
+
         <CardHeader
           sx={{
             display: "flex",
@@ -170,7 +166,8 @@ export const AdCard = ({
 
           {mailto && (
             <Button
-              variant="outlined"
+              variant="contained"
+              disableElevation
               sx={{
                 width: "100%",
                 mt: "10px",

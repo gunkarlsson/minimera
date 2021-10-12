@@ -1,16 +1,7 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogContentClassKey,
-  DialogTitle,
-} from "@mui/material";
+import { Button, Dialog, DialogActions, DialogTitle } from "@mui/material";
 
-export const AlertDialog = () => {
+export const AlertDialog = ({ handleLogout, title }) => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -22,24 +13,26 @@ export const AlertDialog = () => {
   };
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Logga ut dialog
-      </Button>
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
+      <Button
+        sx={{ mt: "200px", border: "1px solid" }}
+        variant="outlined"
+        onClick={handleClickOpen}
+        disableElevation
       >
-        <DialogTitle
-          sx={{ p: 3, textAlign: "center", fontSize: "1.5em" }}
-          id="alert-dialog-title"
-        >
-          {"Vill du logga ut?"}
+        {title}
+      </Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle sx={{ p: 3, textAlign: "center", fontSize: "1.5em" }}>
+          Vill du logga ut?
         </DialogTitle>
 
-        <DialogActions sx={{ p: 2 }}>
+        <DialogActions sx={{ px: 3.5, py: 2.5, display: "flex" }}>
           <Button
-            sx={{ mx: 1, px: 1, color: "textSecondary" }}
+            sx={{
+              px: 1,
+              mr: "10px",
+            }}
+            color="secondary"
             variant="outlined"
             disableElevation
             onClick={handleClose}
@@ -47,10 +40,13 @@ export const AlertDialog = () => {
             Tillbaka
           </Button>
           <Button
-            sx={{ mx: 1, px: 3 }}
+            sx={{
+              px: 3,
+            }}
+            color="secondary"
             variant="contained"
             disableElevation
-            onClick={handleClose}
+            onClick={handleLogout}
             autoFocus
           >
             Logga ut

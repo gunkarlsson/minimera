@@ -132,12 +132,7 @@ export const CreateAd = () => {
           </RadioGroup>
         </FormControl>
 
-        <Button
-          type="submit"
-          color="secondary"
-          variant="contained"
-          disableElevation
-        >
+        <Button type="submit" variant="contained" disableElevation>
           Skapa annons
         </Button>
       </form>
