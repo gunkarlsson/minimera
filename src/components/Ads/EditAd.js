@@ -29,27 +29,6 @@ export const EditAd = ({ ad }) => {
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
-  // const getAds = async () => {
-  //   setLoading(true);
-
-  //   await db
-  //     .collection("allAds")
-  //     .doc(id)
-  //     .get()
-  //     .then((doc) => {
-  //       setChosenAd(doc.data());
-  //       setLoading(false);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   if (currentUserInfo) {
-  //     getAds();
-  //   }
-  // }, [currentUserInfo]);
 
   useEffect(() => {
     setLoading(true);
@@ -59,7 +38,6 @@ export const EditAd = ({ ad }) => {
       .then((doc) => {
         setChosenAd(doc.data());
         setLoading(false);
-        // console.log(chosenAd.title);
       })
       .catch((e) => {
         console.log(e);

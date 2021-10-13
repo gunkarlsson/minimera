@@ -49,12 +49,12 @@ export const UpdateProfile = () => {
       .then(() => {
         setMessage("Kontot har nu uppdaterats");
       })
-      .then(() => {
-        history.push("/");
-      })
+      // .then(() => {
+      //   history.push("/");
+      // })
       .catch(() => {
         setError(
-          "Misslyckades med att uppdatera konto. Pröva att logga ut och in igen."
+          "Misslyckades med att uppdatera konto. Antingen var emailadressen redan registrerad, eller så behöver du logga ut och in igen."
         );
         //Probably "Credentials are too old, you need to log in again"-error?
         //https://firebase.google.com/docs/reference/js/firebase.User#reauthenticatewithcredential
@@ -82,10 +82,9 @@ export const UpdateProfile = () => {
         Uppdatera profil
       </Typography>
 
-      {error && <Typography>{error}</Typography>}
-      {message && <Typography>{message}</Typography>}
-
       <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
+        {error && <Typography color="error">{error}</Typography>}
+        {message && <Typography color="success">{message}</Typography>}
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField
             sx={{ marginTop: "10px", marginBottom: "10px" }}

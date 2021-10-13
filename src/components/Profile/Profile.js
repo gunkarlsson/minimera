@@ -55,7 +55,6 @@ export const Profile = () => {
         <img className={classes.image} src={smiley} alt="profile-pic-smiley" />
         {/* ^ borde vara en template string literal för att bli conditional rendered */}
         <Button
-          color="secondary"
           variant="contained"
           disableElevation
           sx={{
@@ -70,7 +69,6 @@ export const Profile = () => {
           </Link>
         </Button>
         <Button
-          color="secondary"
           variant="contained"
           disableElevation
           sx={{
@@ -85,21 +83,8 @@ export const Profile = () => {
           </Link>
         </Button>
         {error && <div>{error}</div>}
-        <Button
-          sx={{ marginTop: "200px" }}
-          color="secondary"
-          variant="outlined"
-          disableElevation
-          onClick={() => {
-            const confirmBox = window.confirm("Do you really want to log out?");
-            if (confirmBox === true) {
-              handleLogout();
-            }
-          }}
-        >
-          Logga ut
-        </Button>
-        <AlertDialog />
+
+        <AlertDialog handleLogout={handleLogout} title={"Logga ut"} />
       </Box>
     </Container>
   );
