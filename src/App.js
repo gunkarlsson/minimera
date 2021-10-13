@@ -15,10 +15,6 @@ import { AuthProvider } from "./context/AuthContext";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Layout } from "./style/Layout";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-<<<<<<< HEAD
-import { orange } from "@mui/material/colors";
-import React from "react";
-=======
 import {
   orange,
   teal,
@@ -34,7 +30,6 @@ import {
   red,
   deepOrange,
 } from "@mui/material/colors";
->>>>>>> material-ui
 
 const theme = createTheme({
   palette: {

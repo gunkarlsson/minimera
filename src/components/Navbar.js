@@ -30,39 +30,6 @@ export const Navbar = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <BottomNavigation
-      value={value}
-      onChange={handleChange}
-      className={classes.stickToBottom}
-      showLabels
-    >
-      <BottomNavigationAction
-        component={NavLink}
-        to="/"
-        label="Hem"
-        icon={<HomeRoundedIcon />}
-      />
-      <BottomNavigationAction
-        component={NavLink}
-        to="/create-ad"
-        label="Ny annons"
-        icon={<AddCircleRoundedIcon />}
-      />
-      <BottomNavigationAction
-        component={NavLink}
-        to="/about"
-        label="Om"
-        icon={<HelpCenterRoundedIcon />}
-      />
-      <BottomNavigationAction
-        component={NavLink}
-        to="/profile"
-        label="Profil"
-        icon={<PersonRoundedIcon />}
-      />
-    </BottomNavigation>
-=======
     <>
       <BottomNavigation
         value={value}
@@ -97,6 +64,5 @@ export const Navbar = () => {
         />
       </BottomNavigation>
     </>
->>>>>>> material-ui
   );
 };
