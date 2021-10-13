@@ -93,7 +93,6 @@ export const AdCard = ({
         }}
       >
         {/* <CardActionArea component={Link} to={link}> */}
-
         <CardHeader
           sx={{
             display: "flex",
@@ -108,6 +107,7 @@ export const AdCard = ({
             </Typography>
           }
         />
+        {/* </CardActionArea> */}
         <CardContent
           sx={{
             "&: last-child": {
@@ -170,7 +170,7 @@ export const AdCard = ({
               disableElevation
               sx={{
                 width: "100%",
-                mt: "10px",
+                mt: "20px",
               }}
             >
               <Mailto

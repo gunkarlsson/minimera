@@ -35,6 +35,7 @@ export const Navbar = () => {
         value={value}
         onChange={handleChange}
         className={classes.stickToBottom}
+        // sm={showLabels(false)}
         showLabels
       >
         <BottomNavigationAction
