@@ -7,6 +7,7 @@ import { useHistory } from "react-router";
 import {
   Typography,
   Button,
+  Box,
   Container,
   TextField,
   Radio,
@@ -15,23 +16,12 @@ import {
   FormControl,
   FormLabel,
 } from "@mui/material";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles({
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    padding: "10px",
-  },
-});
 
 export const CreateAd = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const { currentUser } = useAuth();
   const currentUserInfo = useCurrentUserInfo();
-
-  const classes = useStyles();
   const history = useHistory();
   const [titleError, setTitleError] = useState(false);
   const [descError, setDescError] = useState(false);
@@ -71,15 +61,17 @@ export const CreateAd = () => {
   return (
     <Container>
       <Typography variant="h1">Lägg till ny annons</Typography>
-      <form
+      <Box
+        component="form"
         noValidate
         autoComplete="off"
         onSubmit={handleSubmit}
-        className={classes.form}
+        sx={{ display: "flex", flexDirection: "column", padding: "10px" }}
       >
         <TextField
-          sx={{ marginTop: "10px", marginBottom: "10px" }}
+          sx={{ mt: "10px", mb: "10px" }}
           onChange={(e) => setTitle(e.target.value)}
+          value={title}
           label="Rubrik"
           variant="outlined"
           color="secondary"
@@ -89,8 +81,9 @@ export const CreateAd = () => {
           inputProps={{ maxLength: 30 }}
         />
         <TextField
-          sx={{ marginTop: "10px", marginBottom: "20px" }}
+          sx={{ mt: "10px", mb: "20px" }}
           onChange={(e) => setDesc(e.target.value)}
+          value={desc}
           label="Beskrivning"
           variant="outlined"
           color="secondary"
@@ -107,7 +100,7 @@ export const CreateAd = () => {
           <RadioGroup
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            sx={{ marginLeft: "5px", marginBottom: "50px" }}
+            sx={{ ml: "5px", mb: "50px" }}
           >
             <FormControlLabel
               value="bygg"
@@ -135,13 +128,19 @@ export const CreateAd = () => {
         <Button type="submit" variant="contained" disableElevation>
           Skapa annons
         </Button>
-      </form>
+      </Box>
       {success && (
         <Typography
           onClick={() => history.push("/")}
-          sx={{ p: "10px", textDecoration: "underline" }}
+          sx={{
+            color: "success",
+            textAlign: "center",
+            p: "10px",
+            textDecoration: "underline",
+            fontSize: "1.1em",
+          }}
         >
-          Klart! Klicka för att gå tillbaka.
+          Klart! Klicka här för att gå tillbaka.
         </Typography>
       )}
     </Container>

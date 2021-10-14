@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { v4 as uuidv4 } from "uuid";
-import { useAuth } from "../../context/AuthContext";
+
 import {
   Box,
   Button,
@@ -10,25 +10,22 @@ import {
   TextField,
   FormControlLabel,
   FormControl,
-  FormLabel,
   Radio,
   RadioGroup,
 } from "@mui/material";
 import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 import { useParams, useHistory } from "react-router-dom";
-import { useCurrentUserInfo } from "../../hooks/useCurrentUserInfo";
 
 export const EditAd = ({ ad }) => {
   const [loading, setLoading] = useState(false);
   const history = useHistory();
-  const { currentUser } = useAuth();
-  const currentUserInfo = useCurrentUserInfo();
+
   let { id } = useParams();
   const [chosenAd, setChosenAd] = useState();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -37,6 +34,10 @@ export const EditAd = ({ ad }) => {
       .get()
       .then((doc) => {
         setChosenAd(doc.data());
+        setTitle(doc.data().title);
+        setDesc(doc.data().desc);
+        setCategory(doc.data().category);
+
         setLoading(false);
       })
       .catch((e) => {
@@ -47,7 +48,7 @@ export const EditAd = ({ ad }) => {
   const editAd = () => {
     db.collection("allAds")
       .doc(id)
-      .update({ title: title, desc: desc })
+      .update({ title: title, desc: desc, category: category })
       .catch((err) => {
         console.error(err);
       });
@@ -55,7 +56,7 @@ export const EditAd = ({ ad }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setMessage("Sparat!");
+    setSuccess(true);
   };
 
   return (
@@ -83,30 +84,60 @@ export const EditAd = ({ ad }) => {
         <Box sx={{ p: 1 }}>
           <form onSubmit={handleSubmit}>
             <TextField
-              sx={{ marginTop: "10px", marginBottom: "10px" }}
+              sx={{ mb: "10px" }}
               onChange={(e) => setTitle(e.target.value)}
-              defaultValue={chosenAd.title}
               variant="outlined"
               color="secondary"
+              value={title}
               fullWidth
               required
               inputProps={{ maxLength: 30 }}
             />
             <TextField
-              sx={{ marginTop: "10px", marginBottom: "10px" }}
+              sx={{ mb: "10px" }}
               onChange={(e) => setDesc(e.target.value)}
-              defaultValue={chosenAd.desc}
+              value={desc}
               variant="outlined"
               color="secondary"
               multiline
-              rows={10}
+              rows={8}
               fullWidth
               required
               inputProps={{ maxLength: 400 }}
             />
+            <FormControl>
+              <RadioGroup
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                sx={{ ml: "5px" }}
+              >
+                <FormControlLabel
+                  value="bygg"
+                  control={<Radio />}
+                  label="Bygg & verktyg"
+                />
+                <FormControlLabel
+                  value="hem"
+                  control={<Radio />}
+                  label="Hem & trädgård"
+                />
+                <FormControlLabel
+                  value="sport"
+                  control={<Radio />}
+                  label="Sport & fritid"
+                />
+                <FormControlLabel
+                  value="övrigt"
+                  control={<Radio />}
+                  label="Övrigt"
+                />
+              </RadioGroup>
+            </FormControl>
+
             <Button
-              sx={{ width: "100%", my: "50px" }}
-              variant="outlined"
+              sx={{ width: "100%", mt: "20px" }}
+              variant="contained"
+              disableElevation
               onClick={() => editAd({ title, desc, id: uuidv4() })}
               type="submit"
             >
@@ -115,7 +146,19 @@ export const EditAd = ({ ad }) => {
           </form>
         </Box>
       )}
-      <Typography>{message ? "Sparat" : null}</Typography>
+      {success && (
+        <Typography
+          onClick={() => history.goBack()}
+          sx={{
+            color: "success",
+            textAlign: "center",
+            p: "10px",
+            textDecoration: "underline",
+          }}
+        >
+          Sparat! Klicka här för att gå tillbaka.
+        </Typography>
+      )}
     </Container>
   );
 };

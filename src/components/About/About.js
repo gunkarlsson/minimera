@@ -20,7 +20,7 @@ export const About = () => {
           component="h2"
           variant="h6"
           gutterBottom
-          sx={{ margin: "5px 0 15px 0" }}
+          sx={{ m: "5px 0 15px 0" }}
         >
           Varför behövs minimera?
         </Typography>
@@ -44,7 +44,7 @@ export const About = () => {
           component="h2"
           variant="h6"
           gutterBottom
-          sx={{ margin: "5px 0 15px 0" }}
+          sx={{ m: "5px 0 15px 0" }}
         >
           Att låna av någon
         </Typography>
@@ -74,7 +74,7 @@ export const About = () => {
           component="h2"
           variant="h6"
           gutterBottom
-          sx={{ margin: "5px 0 15px 0" }}
+          sx={{ m: "5px 0 15px 0" }}
         >
           Att låna ut till någon
         </Typography>

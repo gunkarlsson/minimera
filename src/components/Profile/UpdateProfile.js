@@ -47,14 +47,14 @@ export const UpdateProfile = () => {
       //we pass in the array of promises,
       //when all the promises finishes and are successful, then history.push will execute
       .then(() => {
-        setMessage("Kontot har nu uppdaterats");
+        setMessage("Kontot har nu uppdaterats.");
       })
       // .then(() => {
       //   history.push("/");
       // })
       .catch(() => {
         setError(
-          "Misslyckades med att uppdatera konto. Antingen var emailadressen redan registrerad, eller så behöver du logga ut och in igen."
+          "Misslyckades med att uppdatera konto. Pröva att logga ut och in igen."
         );
         //Probably "Credentials are too old, you need to log in again"-error?
         //https://firebase.google.com/docs/reference/js/firebase.User#reauthenticatewithcredential
@@ -79,30 +79,37 @@ export const UpdateProfile = () => {
       </Button>
 
       <Typography component="h1" variant="h2">
-        Uppdatera profil
+        Ändra lösenord
       </Typography>
 
       <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
-        {error && <Typography color="error">{error}</Typography>}
-        {message && <Typography color="success">{message}</Typography>}
+        <Typography
+          sx={{
+            p: "1px",
+            my: "10px",
+            fontSize: "1.1em",
+            fontStyle: "italic",
+          }}
+        >
+          Email: {currentUser.email}
+        </Typography>
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <TextField
-            sx={{ marginTop: "10px", marginBottom: "10px" }}
+          {/* <TextField
+            sx={{ mt: "10px", mb: "10px" }}
             onChange={(e) => setEmail(e.target.value)}
             label={currentUser.email}
             variant="outlined"
             color="secondary"
             fullWidth
             aria-label="email input"
-          />
-
+          /> */}
           <TextField
             sx={{ mt: "10px" }}
             type="password"
             onChange={(e) => setPassword(e.target.value)}
             label="Lösenord"
             variant="outlined"
-            color="secondary"
+            color="primary"
             fullWidth
             required
             aria-label="password input"
@@ -111,7 +118,6 @@ export const UpdateProfile = () => {
           <FormHelperText id="password-input">
             Lösenordet måste vara minst 6 tecken
           </FormHelperText>
-
           <TextField
             sx={{ mt: "10px", mb: "5px" }}
             type="password"
@@ -123,7 +129,6 @@ export const UpdateProfile = () => {
             required
             aria-label="password confirmation"
           />
-
           <Button
             sx={{ width: "100%", mt: "50px" }}
             variant="contained"
@@ -133,6 +138,16 @@ export const UpdateProfile = () => {
           >
             Spara ändringar
           </Button>
+          {error && (
+            <Typography sx={{ my: "15px" }} color="error">
+              {error}
+            </Typography>
+          )}
+          {message && (
+            <Typography sx={{ my: "15px" }} color="success">
+              {message}
+            </Typography>
+          )}
         </form>
       </Box>
     </Container>

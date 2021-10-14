@@ -8,6 +8,7 @@ export const Home = () => {
   const [ads, setAds] = useState([]);
   const [loading, setLoading] = useState(false);
   const currentUserInfo = useCurrentUserInfo();
+  const [isUnmounting, setIsUnmounting] = useState(false);
 
   const getAds = async () => {
     setLoading(true);
@@ -24,26 +25,36 @@ export const Home = () => {
         setAds(gottenAds);
       });
 
-    setLoading(false);
+    if (!isUnmounting) {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
     if (currentUserInfo) {
       getAds();
     }
+
+    return () => {
+      setIsUnmounting(true);
+    };
   }, [currentUserInfo]);
 
   return (
     <Container>
       <Typography component="h1" variant="h1">
-        Annonser i {currentUserInfo.area}
+        Annonser i {currentUserInfo?.area}
       </Typography>
 
       {loading ? (
         <Typography component="h2" variant="h2">
           Loading...
         </Typography>
-      ) : null}
+      ) : // <Typography component="h2" variant="h2">
+      //   {ads.length < 0 && "Det finns inga annonser i området ännu."}
+      // </Typography>
+
+      null}
 
       {ads.map((ad) => (
         <div key={ad.id}>

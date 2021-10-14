@@ -11,6 +11,7 @@ export const MyAds = () => {
   const [loading, setLoading] = useState(false);
   const { currentUser } = useAuth();
   const history = useHistory();
+  const [isUnmounting, setIsUnmounting] = useState(false);
 
   const getAds = () => {
     setLoading(true);
@@ -22,12 +23,18 @@ export const MyAds = () => {
           items.push(doc.data());
         });
         setMyAds(items);
-        setLoading(false);
+        // setLoading(false);
+        if (!isUnmounting) {
+          setLoading(false);
+        }
       });
   };
 
   useEffect(() => {
     getAds();
+    return () => {
+      setIsUnmounting(true);
+    };
   }, []);
 
   const deleteAd = (ad) => {

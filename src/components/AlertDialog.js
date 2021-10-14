@@ -14,7 +14,7 @@ export const AlertDialog = ({ handleLogout, title }) => {
   return (
     <>
       <Button
-        sx={{ mt: "200px", border: "1px solid" }}
+        sx={{ my: "10px", border: "1px solid" }}
         variant="outlined"
         onClick={handleClickOpen}
         disableElevation

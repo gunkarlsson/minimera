@@ -1,29 +1,18 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import { makeStyles } from "@mui/styles";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  useMediaQuery,
+} from "@mui/material";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import HelpCenterRoundedIcon from "@mui/icons-material/HelpCenterRounded";
 
-const useStyles = makeStyles({
-  stickToBottom: {
-    zIndex: 1,
-    borderTop: "1px solid black",
-    width: "100%",
-    position: "fixed",
-    bottom: 0,
-    height: "60px",
-  },
-  active: {
-    border: "1px solid red",
-  },
-});
-
 export const Navbar = () => {
-  const classes = useStyles();
   const [value, setValue] = useState("hem");
+  const matches = useMediaQuery("(min-width:365px)");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,32 +23,38 @@ export const Navbar = () => {
       <BottomNavigation
         value={value}
         onChange={handleChange}
-        className={classes.stickToBottom}
-        // sm={showLabels(false)}
+        sx={{
+          zIndex: 1,
+          borderTop: "1px solid black",
+          width: "100%",
+          position: "fixed",
+          bottom: 0,
+          height: "60px",
+        }}
         showLabels
       >
         <BottomNavigationAction
           component={NavLink}
           to="/"
-          label="Hem"
+          label={matches ? "Hem" : null}
           icon={<HomeRoundedIcon />}
         />
         <BottomNavigationAction
           component={NavLink}
           to="/create-ad"
-          label="Ny annons"
+          label={matches ? "Ny Annons" : null}
           icon={<AddCircleRoundedIcon />}
         />
         <BottomNavigationAction
           component={NavLink}
           to="/about"
-          label="Om"
+          label={matches ? "Om" : null}
           icon={<HelpCenterRoundedIcon />}
         />
         <BottomNavigationAction
           component={NavLink}
           to="/profile"
-          label="Profil"
+          label={matches ? "Profil" : null}
           icon={<PersonRoundedIcon />}
         />
       </BottomNavigation>

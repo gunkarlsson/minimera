@@ -32,7 +32,7 @@ export const Login = () => {
       <Box sx={{ display: "flex", flexDirection: "column", padding: "10px" }}>
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField
-            sx={{ marginTop: "10px", marginBottom: "10px" }}
+            sx={{ mt: "10px", mb: "10px" }}
             onChange={(e) => setEmail(e.target.value)}
             label="Email"
             variant="outlined"
