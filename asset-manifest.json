@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/minimera/static/css/main.09873da2.chunk.css",
-    "main.js": "/minimera/static/js/main.32909787.chunk.js",
-    "main.js.map": "/minimera/static/js/main.32909787.chunk.js.map",
+    "main.js": "/minimera/static/js/main.7b4af3ca.chunk.js",
+    "main.js.map": "/minimera/static/js/main.7b4af3ca.chunk.js.map",
     "runtime-main.js": "/minimera/static/js/runtime-main.38c59b2f.js",
     "runtime-main.js.map": "/minimera/static/js/runtime-main.38c59b2f.js.map",
-    "static/js/2.5e9de02c.chunk.js": "/minimera/static/js/2.5e9de02c.chunk.js",
-    "static/js/2.5e9de02c.chunk.js.map": "/minimera/static/js/2.5e9de02c.chunk.js.map",
+    "static/js/2.3070a49e.chunk.js": "/minimera/static/js/2.3070a49e.chunk.js",
+    "static/js/2.3070a49e.chunk.js.map": "/minimera/static/js/2.3070a49e.chunk.js.map",
     "index.html": "/minimera/index.html",
     "static/css/main.09873da2.chunk.css.map": "/minimera/static/css/main.09873da2.chunk.css.map",
-    "static/js/2.5e9de02c.chunk.js.LICENSE.txt": "/minimera/static/js/2.5e9de02c.chunk.js.LICENSE.txt",
+    "static/js/2.3070a49e.chunk.js.LICENSE.txt": "/minimera/static/js/2.3070a49e.chunk.js.LICENSE.txt",
     "static/media/smiley.1378a5d9.svg": "/minimera/static/media/smiley.1378a5d9.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.38c59b2f.js",
-    "static/js/2.5e9de02c.chunk.js",
+    "static/js/2.3070a49e.chunk.js",
     "static/css/main.09873da2.chunk.css",
-    "static/js/main.32909787.chunk.js"
+    "static/js/main.7b4af3ca.chunk.js"
   ]
 }
