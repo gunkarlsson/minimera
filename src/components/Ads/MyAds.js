@@ -62,22 +62,24 @@ export const MyAds = () => {
         Mina annonser
       </Typography>
 
-      {loading ? (
-        <Typography component="h2" variant="h6">
-          Loading...
+      {myAds.length > 0 ? (
+        <>
+          {myAds.map((ad) => (
+            <div key={ad.id}>
+              <AdCard
+                ad={ad}
+                deleteAd={deleteAd}
+                editAd={"/edit-ad/" + ad.id}
+                noWrap
+              />
+            </div>
+          ))}
+        </>
+      ) : (
+        <Typography variant="h3">
+          Du har inte lagt in några annonser ännu.
         </Typography>
-      ) : null}
-
-      {myAds.map((ad) => (
-        <div key={ad.id}>
-          <AdCard
-            ad={ad}
-            deleteAd={deleteAd}
-            editAd={"/edit-ad/" + ad.id}
-            noWrap
-          />
-        </div>
-      ))}
+      )}
     </Container>
   );
 };

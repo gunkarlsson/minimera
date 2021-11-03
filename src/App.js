@@ -58,6 +58,10 @@ const theme = createTheme({
       margin: "0px 0 40px 0",
       fontWeight: 500,
     },
+    h3: {
+      fontSize: "1.5rem",
+      textAlign: "center",
+    },
   },
 });
 

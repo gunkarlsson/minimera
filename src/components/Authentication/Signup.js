@@ -84,9 +84,10 @@ export const Signup = () => {
             fullWidth
             required
             aria-label="password input"
+            helperText="Lösenordet måste innehålla minst 6 tecken"
           />
           <TextField
-            sx={{ mt: "10px", mb: "5px" }}
+            sx={{ mt: "5px", mb: "10px" }}
             type="password"
             onChange={(e) => setPasswordConfirm(e.target.value)}
             label="Bekräfta lösenord"
