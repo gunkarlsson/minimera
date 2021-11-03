@@ -64,7 +64,7 @@ const theme = createTheme({
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router basename="/minimera">
         <AuthProvider>
           <Layout>
             <Switch>
